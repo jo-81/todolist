@@ -6,8 +6,6 @@ parameters:
     ignoreErrors:
         - identifier: doctrine.columnType
         - identifier: return.type
-        - identifier: missingType.iterableValue
-        - identifier: doctrine.associationType
 
     paths:
         - src/
