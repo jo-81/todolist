@@ -14,7 +14,7 @@ final class Version20250402182629 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return "Création des entités User et Admin";
+        return 'Création des entités User et Admin';
     }
 
     public function up(Schema $schema): void

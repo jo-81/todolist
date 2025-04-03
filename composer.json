@@ -92,6 +92,15 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "setup-test-env": [
+            "symfony console doctrine:database:create --env=test",
+            "symfony console doctrine:migrations:migrate --env=test --no-interaction",
+            "symfony console hautelook:fixtures:load --env=test --no-interaction"
+        ],
+        "setup-dev": [
+            "symfony console doctrine:migrations:migrate --no-interaction",
+            "symfony console hautelook:fixtures:load --no-interaction"
         ]
     },
     "conflict": {

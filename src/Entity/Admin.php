@@ -13,7 +13,7 @@ class Admin extends User
     #[ORM\PrePersist]
     public function setPersistValue(): void
     {
-        $this->roles = ["ROLE_ADMIN"];
+        $this->roles = ['ROLE_ADMIN'];
         $this->membershipLevel = MembershipLevel::VIP;
     }
 }

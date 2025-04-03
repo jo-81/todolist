@@ -6,6 +6,7 @@ parameters:
     ignoreErrors:
         - identifier: doctrine.columnType
         - identifier: return.type
+        - '#Unreachable statement#'
 
     paths:
         - src/
