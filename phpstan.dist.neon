@@ -6,8 +6,7 @@ parameters:
     ignoreErrors:
         - identifier: doctrine.columnType
         - identifier: return.type
-        - identifier: missingType.iterableValue
-        - identifier: doctrine.associationType
+        - '#Unreachable statement#'
 
     paths:
         - src/

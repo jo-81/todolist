@@ -1,0 +1,5 @@
+App\Entity\Admin:
+  admin:
+    username: admin
+    email: admin@domaine.fr
+    password: \$2y\$10\$cEGhpqnrVhuqBKw7F3qb0urHVHaxSe/GRuzFsJGJJfkN06Z32OJIO

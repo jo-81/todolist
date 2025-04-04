@@ -1,3 +1,15 @@
+/* FONT */
+$font-family-base: "Poppins";
+$body-color: #4f4f4f;
+
+.title {
+    color: #22133a !important;
+}
+
+/* FORM */
+$form-label-margin-bottom: 0.25rem;
+$form-label-font-weight: 600;
+
 @import '../../vendor/thomaspark/bootswatch/dist/pulse/variables';
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 @import '../../vendor/thomaspark/bootswatch/dist/pulse/bootswatch';
