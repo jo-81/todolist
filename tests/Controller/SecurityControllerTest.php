@@ -59,7 +59,7 @@ class SecurityControllerTest extends WebTestCase
 
         self::assertResponseRedirects('/');
         $this->client->followRedirect();
-        self::assertSelectorTextContains('.toast.toast-success', 'Bienvenue admin, vous êtes connecté !');
+        self::assertSelectorTextContains('.toast.text-bg-success', 'Bienvenue admin, vous êtes connecté !');
     }
 
     /**
@@ -76,6 +76,6 @@ class SecurityControllerTest extends WebTestCase
 
         self::assertResponseRedirects('/');
         $this->client->followRedirect();
-        self::assertSelectorTextContains('.toast.toast-info', 'Vous êtes déjà connecté.');
+        self::assertSelectorTextContains('.toast.text-bg-info', 'Vous êtes déjà connecté.');
     }
 }

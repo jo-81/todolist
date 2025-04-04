@@ -20,14 +20,12 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="position-relative">
         {% block body %}{% endblock %}
 
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-            <div class="toast toast-{{ label }}">
-                {{ message }}
-            </div>
+                <twig:Bootstrap:Toast type="{{ label }}" message="{{ message }}"/>
             {% endfor %}
         {% endfor %}
     </body>

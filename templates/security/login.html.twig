@@ -26,11 +26,17 @@
                         
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         
-                        <button class="btn btn-primary" type="submit">Connexion</button>
+                        <div>
+                            <button class="btn btn-primary" type="submit">Connexion</button>
+                        </div>
                     </div>
 
                     {% if error %}
-                        <div class="alert alert-danger mt-3 mb-0">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        <twig:Bootstrap:Alert 
+                            class="mt-3 mb-0"
+                            type="danger" 
+                            message="{{ error.messageKey|trans(error.messageData, 'security') }}"
+                        />
                     {% endif %}
                 </form>
             </div>
