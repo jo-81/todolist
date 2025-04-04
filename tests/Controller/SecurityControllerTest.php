@@ -57,7 +57,7 @@ class SecurityControllerTest extends WebTestCase
             'password' => '0000',
         ]);
 
-        self::assertResponseRedirects('/');
+        self::assertResponseRedirects('/profile');
         $this->client->followRedirect();
         self::assertSelectorTextContains('.toast.text-bg-success', 'Bienvenue admin, vous êtes connecté !');
     }

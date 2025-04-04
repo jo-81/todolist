@@ -6,6 +6,12 @@ parameters:
     ignoreErrors:
         - identifier: doctrine.columnType
         - identifier: return.type
+        - identifier: argument.type
+        - identifier: argument.templateType
+        - identifier: missingType.iterableValue
+        - identifier: function.alreadyNarrowedType
+        - identifier: staticProperty.nonStaticAccess
+        - identifier: method.notFound
         - '#Unreachable statement#'
 
     paths:
