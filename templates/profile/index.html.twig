@@ -1,20 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Mon profil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<section>
+    <header class="border-bottom py-5">
+        <div class="container">
+            <h1 class="h2 text-uppercase title fw-bold">Mon profil</h1>
+            <div>
+                <a href="#" class="btn btn-primary">Modifier</a>
+                <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Déconnexion</a>
+            </div>
+        </div>
+    </header>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="my-5 container">
+        <div class="row g-4">
+            <section class="col-12 col-lg">
+                <div class="border p-4">
+                    <h2 class="h5 fw-semibold mb-0 d-flex gap-2 align-items-center">
+                        <twig:Badge type="secondary">
+                            <twig:ux:icon name="tabler:user" class="icon" />
+                        </twig:Badge>
+                        <span class="title">Informations</span>
+                    </h2>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>E:/2025/Développeur/Projets/1 - Todolist/project/src/Controller/ProfileController.php</code></li>
-        <li>Your template at <code>E:/2025/Développeur/Projets/1 - Todolist/project/templates/profile/index.html.twig</code></li>
-    </ul>
-</div>
+                    <twig:List>
+                        <twig:ListItem key="Pseduo" value="{{ user.username }}"/>
+                        <twig:ListItem key="Adresse email" value="{{ user.email }}" />
+                        <twig:ListItem key="Workspaces" value="{{ informationWorkspace(user.membershipLevel) }}"/>
+                        <twig:ListItem key="Projets" value="{{ informationProject(user.membershipLevel) }}" />
+                    </twig:List>
+                </div>
+                
+            </section>
+            
+            <aside class="col-12 col-lg">
+                <div class="border p-4">
+                    <h2 class="h5 title fw-semibold mb-0 d-flex gap-2 align-items-center">
+                        <twig:Badge type="secondary">
+                            <twig:ux:icon name="tabler:activity" class="icon" />
+                        </twig:Badge>
+                        <span class="title">Activités</span>
+                    </h2>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
 {% endblock %}
