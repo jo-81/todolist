@@ -12,6 +12,7 @@ parameters:
         - identifier: function.alreadyNarrowedType
         - identifier: staticProperty.nonStaticAccess
         - identifier: method.notFound
+        - identifier: missingType.generics
         - '#Unreachable statement#'
 
     paths:
