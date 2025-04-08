@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon profil{% endblock %}
+{% block title %}Modifier mon profil{% endblock %}
 
 {% block body %}
 <section>
     <header class="border-bottom py-5">
         <div class="container">
-            <h1 class="h2 text-uppercase title fw-bold">Mon profil</h1>
+            <h1 class="h2 text-uppercase title fw-bold">Modifier mon profil</h1>
             <div>
+                <a href="{{ path('profile') }}" class="btn btn-primary">Profil</a>
                 <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
         </div>
@@ -20,26 +21,30 @@
                     <div class="border p-4">
                         <h2 class="h5 fw-semibold mb-0 d-flex gap-2 align-items-center">
                             <twig:Badge type="secondary">
-                                <twig:ux:icon name="tabler:user" class="icon" />
+                                <twig:ux:icon name="tabler:user-edit" class="icon" />
                             </twig:Badge>
                             <span class="title">Informations</span>
                         </h2>
 
-                        <twig:List>
-                            <twig:ListItem key="Pseduo" value="{{ user.username }}"/>
-                            <twig:ListItem key="Adresse email" value="{{ user.email }}" />
-                            <twig:ListItem key="Workspaces" value="{{ informationWorkspace(user.membershipLevel) }}"/>
-                            <twig:ListItem key="Projets" value="{{ informationProject(user.membershipLevel) }}" />
-                        </twig:List>
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <twig:Bootstrap:Alert class="mt-3 mb-0" type="{{ label }}" message="{{ message }}" />
+                            {% endfor %}
+                        {% endfor %}
 
-                        <div class="mt-3">
-                            <a href="{{ path('profile.edit') }}" class="btn btn-primary">Modifier</a>
-                        </div>
+                        <twig:List>
+                            {{ form_start(form) }}
+                                {{ form_row(form.email) }}
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                </div>
+                            {{ form_end(form) }}
+                        </twig:List>
                     </div>
                     {% include "partials/_flashes.html.twig" %}
                 </turbo-frame>
             </section>
-            
+
             <aside class="col-12 col-lg">
                 <div class="border p-4">
                     <h2 class="h5 title fw-semibold mb-0 d-flex gap-2 align-items-center">
@@ -50,7 +55,7 @@
                     </h2>
                 </div>
             </aside>
-        </div>
+        </div>        
     </div>
 </section>
 {% endblock %}
