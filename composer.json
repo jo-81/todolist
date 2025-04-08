@@ -101,7 +101,9 @@
         "setup-dev": [
             "symfony console doctrine:migrations:migrate --no-interaction",
             "symfony console hautelook:fixtures:load --no-interaction"
-        ]
+        ],
+        "fix": "vendor/bin/php-cs-fixer fix",
+        "analyse": "vendor/bin/phpstan analyse --memory-limit=128M"
     },
     "conflict": {
         "symfony/symfony": "*"

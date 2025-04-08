@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -44,6 +46,17 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(enumType: MembershipLevel::class)]
     protected ?MembershipLevel $membershipLevel = null;
+
+    /**
+     * @var Collection<int, Workspace>
+     */
+    #[ORM\OneToMany(targetEntity: Workspace::class, mappedBy: 'owner', orphanRemoval: true)]
+    private Collection $workspaces;
+
+    public function __construct()
+    {
+        $this->workspaces = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,6 +153,36 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMembershipLevel(MembershipLevel $membershipLevel): static
     {
         $this->membershipLevel = $membershipLevel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Workspace>
+     */
+    public function getWorkspaces(): Collection
+    {
+        return $this->workspaces;
+    }
+
+    public function addWorkspace(Workspace $workspace): static
+    {
+        if (!$this->workspaces->contains($workspace)) {
+            $this->workspaces->add($workspace);
+            $workspace->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkspace(Workspace $workspace): static
+    {
+        if ($this->workspaces->removeElement($workspace)) {
+            // set the owning side to null (unless already changed)
+            if ($workspace->getOwner() === $this) {
+                $workspace->setOwner(null);
+            }
+        }
 
         return $this;
     }

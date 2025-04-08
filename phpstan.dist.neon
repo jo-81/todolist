@@ -13,6 +13,7 @@ parameters:
         - identifier: staticProperty.nonStaticAccess
         - identifier: method.notFound
         - identifier: missingType.generics
+        - identifier: doctrine.associationType
         - '#Unreachable statement#'
 
     paths:
