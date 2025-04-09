@@ -1,0 +1,17 @@
+<div 
+    {{ attributes.defaults({class: "modal fade"}) }}
+    id="{{ id }}" 
+    tabindex="-1"
+    aria-labelledby="{{ id }}Label">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-0">
+            <div class="modal-header p-md-4 bg-primary bg-opacity-10">
+                <h5 class="modal-title h5 fw-semibold title" id="{{ id }}Label">{{ title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-md-4">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>

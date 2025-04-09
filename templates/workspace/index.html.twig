@@ -4,12 +4,22 @@
 
 {% block body %}
 <section>
-    <twig:Partials:HeaderPage title="La liste des Workspaces"/>
+    <twig:Partials:HeaderPage title="La liste des Workspaces">
+        <twig:block name="content">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#workspaceRegister">Ajouter</button>
+        </twig:block>
+    </twig:Partials:HeaderPage>
 
     <twig:Partials:ContentPage>
         <twig:block name="content">
             <twig:Workspace:Lists />
         </twig:block>
     </twig:Partials:ContentPage>
+
+    <twig:Bootstrap:Modal title="Ajouter un workspace" id="workspaceRegister">
+        <twig:block name="content">
+            <twig:Workspace:Form />
+        </twig:block>
+    </twig:Bootstrap:Modal>
 </section>
 {% endblock %}
