@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.14",
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.3",
+        "knplabs/knp-paginator-bundle": "^6.7",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.1",
         "symfony/asset": "7.2.*",
@@ -101,7 +102,9 @@
         "setup-dev": [
             "symfony console doctrine:migrations:migrate --no-interaction",
             "symfony console hautelook:fixtures:load --no-interaction"
-        ]
+        ],
+        "fix": "vendor/bin/php-cs-fixer fix",
+        "analyse": "vendor/bin/phpstan analyse --memory-limit=1G"
     },
     "conflict": {
         "symfony/symfony": "*"

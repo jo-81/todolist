@@ -4,53 +4,54 @@
 
 {% block body %}
 <section>
-    <header class="border-bottom py-5">
-        <div class="container">
-            <h1 class="h2 text-uppercase title fw-bold">Mon profil</h1>
+    <twig:Partials:HeaderPage title="Mon profil">
+        <twig:block name="content">
             <div>
                 <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
-        </div>
-    </header>
+        </twig:block>
+    </twig:Partials:HeaderPage>
 
-    <div class="my-5 container">
-        <div class="row g-4">
-            <section class="col-12 col-lg">
-                <turbo-frame id="user_informations">
-                    <div class="border p-4">
-                        <h2 class="h5 fw-semibold mb-0 d-flex gap-2 align-items-center">
-                            <twig:Badge type="secondary">
-                                <twig:ux:icon name="tabler:user" class="icon" />
-                            </twig:Badge>
-                            <span class="title">Informations</span>
-                        </h2>
-
-                        <twig:List>
-                            <twig:ListItem key="Pseduo" value="{{ user.username }}"/>
-                            <twig:ListItem key="Adresse email" value="{{ user.email }}" />
-                            <twig:ListItem key="Workspaces" value="{{ informationWorkspace(user.membershipLevel) }}"/>
-                            <twig:ListItem key="Projets" value="{{ informationProject(user.membershipLevel) }}" />
-                        </twig:List>
-
-                        <div class="mt-3">
-                            <a href="{{ path('profile.edit') }}" class="btn btn-primary">Modifier</a>
-                        </div>
-                    </div>
-                    {% include "partials/_flashes.html.twig" %}
-                </turbo-frame>
-            </section>
+    <twig:Partials:ContentPage>
+        <twig:block name="content">
+            <div class="row g-4">
+                <section class="col-12 col-lg">
+                    <turbo-frame id="user_informations">
+                        <div class="border p-4">
+                            <h2 class="h5 fw-semibold mb-0 d-flex gap-2 align-items-center">
+                                <twig:Badge type="secondary">
+                                    <twig:ux:icon name="tabler:user" class="icon" />
+                                </twig:Badge>
+                                <span class="title">Informations</span>
+                            </h2>
             
-            <aside class="col-12 col-lg">
-                <div class="border p-4">
-                    <h2 class="h5 title fw-semibold mb-0 d-flex gap-2 align-items-center">
-                        <twig:Badge type="secondary">
-                            <twig:ux:icon name="tabler:activity" class="icon" />
-                        </twig:Badge>
-                        <span class="title">Activités</span>
-                    </h2>
-                </div>
-            </aside>
-        </div>
-    </div>
+                            <twig:List>
+                                <twig:ListItem key="Pseduo" value="{{ user.username }}" />
+                                <twig:ListItem key="Adresse email" value="{{ user.email }}" />
+                                <twig:ListItem key="Workspaces" value="{{ informationWorkspace(user.membershipLevel) }}" />
+                                <twig:ListItem key="Projets" value="{{ informationProject(user.membershipLevel) }}" />
+                            </twig:List>
+            
+                            <div class="mt-3">
+                                <a href="{{ path('profile.edit') }}" class="btn btn-primary">Modifier</a>
+                            </div>
+                        </div>
+                        {% include "partials/_flashes.html.twig" %}
+                    </turbo-frame>
+                </section>
+            
+                <aside class="col-12 col-lg">
+                    <div class="border p-4">
+                        <h2 class="h5 title fw-semibold mb-0 d-flex gap-2 align-items-center">
+                            <twig:Badge type="secondary">
+                                <twig:ux:icon name="tabler:activity" class="icon" />
+                            </twig:Badge>
+                            <span class="title">Activités</span>
+                        </h2>
+                    </div>
+                </aside>
+            </div>
+        </twig:block>
+    </twig:Partials:ContentPage>
 </section>
 {% endblock %}

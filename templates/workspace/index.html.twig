@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Workspaces{% endblock %}
+
+{% block body %}
+<section>
+    <twig:Partials:HeaderPage title="La liste des Workspaces"/>
+
+    <twig:Partials:ContentPage>
+        <twig:block name="content">
+            <twig:Workspace:Lists />
+        </twig:block>
+    </twig:Partials:ContentPage>
+</section>
+{% endblock %}

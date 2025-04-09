@@ -4,58 +4,59 @@
 
 {% block body %}
 <section>
-    <header class="border-bottom py-5">
-        <div class="container">
-            <h1 class="h2 text-uppercase title fw-bold">Modifier mon profil</h1>
+    <twig:Partials:HeaderPage title="Modifier mon profil">
+        <twig:block name="content">
             <div>
                 <a href="{{ path('profile') }}" class="btn btn-primary">Profil</a>
                 <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
-        </div>
-    </header>
+        </twig:block>
+    </twig:Partials:HeaderPage>
 
-    <div class="my-5 container">
-        <div class="row g-4">
-            <section class="col-12 col-lg">
-                <turbo-frame id="user_informations">
-                    <div class="border p-4">
-                        <h2 class="h5 fw-semibold mb-0 d-flex gap-2 align-items-center">
-                            <twig:Badge type="secondary">
-                                <twig:ux:icon name="tabler:user-edit" class="icon" />
-                            </twig:Badge>
-                            <span class="title">Informations</span>
-                        </h2>
-
-                        {% for label, messages in app.flashes %}
+    <twig:Partials:ContentPage>
+        <twig:block name="content">
+            <div class="row g-4">
+                <section class="col-12 col-lg">
+                    <turbo-frame id="user_informations">
+                        <div class="border p-4">
+                            <h2 class="h5 fw-semibold mb-0 d-flex gap-2 align-items-center">
+                                <twig:Badge type="secondary">
+                                    <twig:ux:icon name="tabler:user-edit" class="icon" />
+                                </twig:Badge>
+                                <span class="title">Informations</span>
+                            </h2>
+            
+                            {% for label, messages in app.flashes %}
                             {% for message in messages %}
-                                <twig:Bootstrap:Alert class="mt-3 mb-0" type="{{ label }}" message="{{ message }}" />
+                            <twig:Bootstrap:Alert class="mt-3 mb-0" type="{{ label }}" message="{{ message }}" />
                             {% endfor %}
-                        {% endfor %}
-
-                        <twig:List>
-                            {{ form_start(form) }}
+                            {% endfor %}
+            
+                            <twig:List>
+                                {{ form_start(form) }}
                                 {{ form_row(form.email) }}
                                 <div>
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                                 </div>
-                            {{ form_end(form) }}
-                        </twig:List>
+                                {{ form_end(form) }}
+                            </twig:List>
+                        </div>
+                        {% include "partials/_flashes.html.twig" %}
+                    </turbo-frame>
+                </section>
+            
+                <aside class="col-12 col-lg">
+                    <div class="border p-4">
+                        <h2 class="h5 title fw-semibold mb-0 d-flex gap-2 align-items-center">
+                            <twig:Badge type="secondary">
+                                <twig:ux:icon name="tabler:activity" class="icon" />
+                            </twig:Badge>
+                            <span class="title">Activités</span>
+                        </h2>
                     </div>
-                    {% include "partials/_flashes.html.twig" %}
-                </turbo-frame>
-            </section>
-
-            <aside class="col-12 col-lg">
-                <div class="border p-4">
-                    <h2 class="h5 title fw-semibold mb-0 d-flex gap-2 align-items-center">
-                        <twig:Badge type="secondary">
-                            <twig:ux:icon name="tabler:activity" class="icon" />
-                        </twig:Badge>
-                        <span class="title">Activités</span>
-                    </h2>
-                </div>
-            </aside>
-        </div>        
-    </div>
+                </aside>
+            </div>
+        </twig:block>
+    </twig:Partials:ContentPage>
 </section>
 {% endblock %}

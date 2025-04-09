@@ -1,0 +1,6 @@
+App\Entity\Workspace:
+  workspace_{1..10}:
+    name: "Workspace <current()>"
+    slug: "workspace-<current()>"
+    description: "<text(400)>"
+    owner: "@admin"
