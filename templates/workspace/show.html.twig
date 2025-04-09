@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ workspace.name }}{% endblock %}
+
+{% block body %}
+<section>
+    <twig:Partials:HeaderPage title="{{ workspace.name }}">
+        <twig:block name="content">
+            <p class="mb-0">Créer le {{ workspace.createdAt|date('d/m/Y') }}</p>
+            {% if workspace.description %}
+                <p class="mt-3 mb-0">{{ workspace.description }}</p>
+            {% endif %}
+        </twig:block>
+    </twig:Partials:HeaderPage>
+</section>
+{% endblock %}
