@@ -1,0 +1,10 @@
+<div{{ attributes.defaults({class: "col-12"}) }}>
+    <article class="border p-3 p-md-4">
+        <small class="mb-2 d-block">{{ workspace.createdAt | date('d/m/Y') }}</small>
+        <h3 class="h6 fw-semibold mb-3">{{ workspace.name }}</h3>
+        <p>{{ workspace.description }}</p>
+        <p class="mb-0">
+            <a href="#" class="btn btn-sm btn-outline-primary">Consulter</a>
+        </p>
+    </article>
+</div>

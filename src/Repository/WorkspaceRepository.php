@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Workspace;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -14,6 +15,31 @@ class WorkspaceRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Workspace::class);
+    }
+    
+    /**
+     * findWorkspaceQuery
+     *
+     * @param  User $user
+     * @param  string $query
+     * @return Workspace[]
+     */
+    public function findWorkspaceQuery(User $user, string $query)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.owner = :owner')
+            ->setParameter('owner', $user)
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+
+        if (!empty($query)) {
+            $qb
+                ->andWhere('p.name LIKE :query')
+                ->setParameter('query', '%'.$query.'%')
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     //    /**

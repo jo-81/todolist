@@ -1,0 +1,12 @@
+<div{{ attributes.defaults({class: "row g-3"}) }}>
+
+    <twig:Bootstrap:Form:Search placeholder="Rechercher un workspace"/>
+
+    {% for workspace in this.workspaces %}
+        <twig:Workspace:Card key="workspace-{{ workspace.id }}" workspace="{{ workspace }}"/>
+        {% else %}
+        <p>Vous n'avez pas encore créer de Workspace</p>
+    {% endfor %}
+
+    {{ knp_pagination_render(this.workspaces) }}
+</div>
