@@ -14,11 +14,13 @@ final class WorkspaceControllerTest extends WebTestCase
 
     /**
      * testAccessWhenUserNotLoggedIndex.
+     *
+     * @dataProvider getWorkspacePath
      */
-    public function testAccessWhenUserNotLoggedIndex(): void
+    public function testAccessWhenUserNotLoggedIndex(string $method, string $path): void
     {
         $client = static::createClient();
-        $client->request('GET', '/workspaces');
+        $client->request($method, $path);
 
         self::assertResponseRedirects('/connexion');
     }
@@ -35,5 +37,13 @@ final class WorkspaceControllerTest extends WebTestCase
         $client->request('GET', '/workspaces');
 
         self::assertResponseIsSuccessful();
+    }
+
+    public static function getWorkspacePath(): array
+    {
+        return [
+            ['GET', '/workspaces'],
+            ['GET', '/workspaces/workspace-1'],
+        ];
     }
 }

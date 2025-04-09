@@ -16,12 +16,10 @@ class WorkspaceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Workspace::class);
     }
-    
+
     /**
-     * findWorkspaceQuery
+     * findWorkspaceQuery.
      *
-     * @param  User $user
-     * @param  string $query
      * @return Workspace[]
      */
     public function findWorkspaceQuery(User $user, string $query)
