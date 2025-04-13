@@ -3,13 +3,13 @@
 namespace App\Tests\DTO;
 
 use App\DTO\User\UserUpdateDTO;
-use App\Tests\Trait\ValidationErrorCountTrait;
+use App\Tests\Trait\ValidationErrorTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserUpdateDTOTest extends KernelTestCase
 {
-    use ValidationErrorCountTrait;
+    use ValidationErrorTrait;
 
     private ValidatorInterface $validator;
 

@@ -16,7 +16,7 @@ final class WorkspaceController extends AbstractController
         return $this->render('workspace/index.html.twig');
     }
 
-    #[Route('/workspaces/{slug}', name: 'workspace.show', methods: ['GET'])]
+    #[Route('/workspaces/{slug}', name: 'workspace.show', methods: ['GET'], priority: 5)]
     public function show(#[MapEntity(mapping: ['slug' => 'slug'])] Workspace $workspace): Response
     {
         return $this->render('workspace/show.html.twig', [
