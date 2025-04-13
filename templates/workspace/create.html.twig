@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un workspace{% endblock %}
+
+{% block body %}
+<section>
+    <twig:Partials:HeaderPage title="Ajouter un workspace" />
+
+    <twig:Partials:ContentPage>
+        <twig:block name="content">
+            <turbo-frame id="register_workspace">
+                {{ form_start(form) }}
+                
+                {{ form_row(form.name) }}
+                {{ form_row(form.description) }}
+                
+                <button class="btn btn-sm btn-primary" type="submit">Enregistrer</button>
+                {{ form_end(form) }}
+            </turbo-frame>
+        </twig:block>
+    </twig:Partials:ContentPage>
+
+    {% include "partials/_flashes.html.twig" %}
+
+</section>
+{% endblock %}

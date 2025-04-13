@@ -1,5 +1,7 @@
 <div{{ attributes.defaults({class: "row g-3"}) }}>
 
+    <p class="mb-0 fw-semibold">Nombre de projets : {{ this.workspaces.totalItemCount }}</p>
+
     <twig:Bootstrap:Form:Search placeholder="Rechercher un workspace"/>
 
     {% for workspace in this.workspaces %}

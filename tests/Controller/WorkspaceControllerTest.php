@@ -27,14 +27,16 @@ final class WorkspaceControllerTest extends WebTestCase
 
     /**
      * testAccessWhenUserLoggedIndex.
+     *
+     * @dataProvider getWorkspacePath
      */
-    public function testAccessWhenUserLoggedIndex(): void
+    public function testAccessWhenUserLoggedIndex(string $method, string $path): void
     {
         $client = static::createClient();
         /** @var User */
         $testUser = $this->findOneEntityBy(User::class, ['email' => 'admin@domaine.fr']);
         $client->loginUser($testUser);
-        $client->request('GET', '/workspaces');
+        $client->request($method, $path);
 
         self::assertResponseIsSuccessful();
     }

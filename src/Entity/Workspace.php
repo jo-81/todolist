@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\WorkspaceRepository;
 
 #[ORM\HasLifecycleCallbacks]
@@ -19,6 +20,7 @@ class Workspace
     private ?string $name = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Gedmo\Slug(fields: ['name'], unique: true)]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -53,7 +55,7 @@ class Workspace
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
 
@@ -77,7 +79,7 @@ class Workspace
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 

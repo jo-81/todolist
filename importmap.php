@@ -31,4 +31,7 @@ return [
     'bootstrap/dist/js/bootstrap.bundle.min.js' => [
         'version' => '5.3.3',
     ],
+    '@stimulus-components/character-counter' => [
+        'version' => '5.1.0',
+    ],
 ];

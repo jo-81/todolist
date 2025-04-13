@@ -4,10 +4,10 @@ namespace App\Form\Workspace;
 
 use App\DTO\Workspace\WorkspaceDTO;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class WorkspaceType extends AbstractType
 {
@@ -16,13 +16,16 @@ class WorkspaceType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du workspace',
+                'help' => 'Nombre de caractères : entre 3 et 20.',
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-                'help' => "Champ optionel",
+                'help' => 'Champ optionnel.',
                 'attr' => [
-                    'rows' => 5
-                ]
+                    'rows' => 5,
+                    'data-character-counter-target' => 'input',
+                    'maxlength' => 400,
+                ],
             ])
         ;
     }

@@ -4,7 +4,7 @@ namespace App\Tests\Trait;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-trait ValidationErrorCountTrait
+trait ValidationErrorTrait
 {
     public function getValidationErrors(object $entity, ValidatorInterface $validator): array
     {
