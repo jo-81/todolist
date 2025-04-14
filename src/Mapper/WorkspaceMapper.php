@@ -18,14 +18,14 @@ class WorkspaceMapper
         return $dto;
     }
 
-    public static function workspaceFromDTO(WorkspaceDTO $dto): Workspace
+    public static function workspaceFromDTO(WorkspaceDTO $dto, ?Workspace $workspace = null): Workspace
     {
-        $workspace = new Workspace();
-        $workspace
+        $entity = $workspace ?? new Workspace();
+        $entity
             ->setName($dto->getName())
             ->setDescription($dto->getDescription())
         ;
 
-        return $workspace;
+        return $entity;
     }
 }
