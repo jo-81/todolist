@@ -11,7 +11,15 @@
                 <p>{{ workspace.description }}</p>
             {% endif %}
             <div>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#workspaceEdit">Modifier</button>
+                <button 
+                    class="btn btn-primary" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#workspaceEdit">Modifier</button>
+
+                <button 
+                    class="btn btn-danger" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#workspaceRemove">Supprimer</button>
             </div>
         </twig:block>
     </twig:Partials:HeaderPage>
@@ -21,6 +29,19 @@
     <twig:Bootstrap:Modal title="Modifier un workspace" id="workspaceEdit">
         <twig:block name="content">
             <twig:Workspace:EditForm workspace="{{ workspace }}"/>
+        </twig:block>
+    </twig:Bootstrap:Modal>
+
+    <twig:Bootstrap:Modal title="Supprimer un workspace" id="workspaceRemove">
+        <twig:block name="content">
+            <form action="{{ path('workspace.remove', {id: workspace.id}) }}" method="POST">
+
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('workspace_remove') }}">
+
+                <p>Confirmez la suppression de votre workspace ?</p>
+                <button type="submit" class="btn btn-sm btn-primary">Oui</button>
+            </form>
         </twig:block>
     </twig:Bootstrap:Modal>
 </section>

@@ -50,14 +50,12 @@ class EditFormTest extends WebTestCase
         $newWorkspace = $this->findOneEntityBy(Workspace::class, ['name' => 'A update Workspace']);
 
         self::assertInstanceOf(Workspace::class, $newWorkspace);
-        $client->followRedirect("/workspaces/" . $newWorkspace->getSlug() );
+        $client->followRedirect('/workspaces/'.$newWorkspace->getSlug());
         self::assertSelectorTextContains('.toast.text-bg-success', 'Workspace modifié !');
     }
-    
+
     /**
-     * testSubmitEditFormComponentWhenUserNotLogged
-     *
-     * @return void
+     * testSubmitEditFormComponentWhenUserNotLogged.
      */
     public function testSubmitEditFormComponentWhenUserNotLogged(): void
     {
@@ -74,11 +72,9 @@ class EditFormTest extends WebTestCase
             'name' => 'A update Workspace',
         ]], 'update');
     }
-    
+
     /**
-     * getWorkspace
-     *
-     * @return Workspace
+     * getWorkspace.
      */
     private function getWorkspace(): Workspace
     {

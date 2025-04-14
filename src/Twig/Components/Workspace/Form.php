@@ -14,7 +14,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[AsLiveComponent]
 final class Form extends AbstractController
@@ -38,8 +37,8 @@ final class Form extends AbstractController
     #[LiveAction]
     public function save()
     {
-        if (! $this->getUser()) {
-            throw new AccessDeniedException("Vous ne pouvez pas ajouter de workspace");
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas ajouter de workspace.');
         }
 
         $this->submitForm();

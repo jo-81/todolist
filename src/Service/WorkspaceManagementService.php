@@ -16,4 +16,10 @@ class WorkspaceManagementService
         $this->em->persist($workspace);
         $this->em->flush();
     }
+
+    public function remove(Workspace $workspace): void
+    {
+        $this->em->remove($workspace);
+        $this->em->flush();
+    }
 }

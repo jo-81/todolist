@@ -31,11 +31,9 @@ class FormTest extends WebTestCase
         $this->assertStringContainsString('workspace[name]', (string) $rendered);
         $this->assertStringContainsString('workspace[description]', (string) $rendered);
     }
-    
+
     /**
-     * testSubmitFormComponent
-     *
-     * @return void
+     * testSubmitFormComponent.
      */
     public function testSubmitFormComponent(): void
     {
@@ -58,11 +56,9 @@ class FormTest extends WebTestCase
         $client->followRedirect();
         self::assertSelectorTextContains('.toast.text-bg-success', 'Workspace créé !');
     }
-    
+
     /**
-     * testSubmitFormComponentWhenUserNotLogged
-     *
-     * @return void
+     * testSubmitFormComponentWhenUserNotLogged.
      */
     public function testSubmitFormComponentWhenUserNotLogged(): void
     {
