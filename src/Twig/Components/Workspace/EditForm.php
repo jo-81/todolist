@@ -17,13 +17,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[AsLiveComponent]
-final class Form extends AbstractController
+final class EditForm extends AbstractController
 {
     use DefaultActionTrait;
     use ComponentWithFormTrait;
 
-    #[LiveProp(writable: ['name', 'description'])]
-    public ?WorkspaceDTO $initialFormData = null;
+    #[LiveProp(writable: ['name', 'description'], hydrateWith: 'hydrateWorkspace', dehydrateWith: 'dehydrateWorkspace')]
+    public WorkspaceDTO $initialFormData;
+
+    #[LiveProp(fieldName: 'workspace_update')]
+    public Workspace $workspace;
 
     public function __construct(
         private WorkspaceManagementService $workspaceManagementService,
@@ -32,26 +35,39 @@ final class Form extends AbstractController
 
     protected function instantiateForm(): FormInterface
     {
+        $this->initialFormData = WorkspaceMapper::toWorkspaceDTO($this->workspace);
         return $this->createForm(WorkspaceType::class, $this->initialFormData);
     }
 
-    #[LiveAction]
-    public function save()
+    public function dehydrateWorkspace(WorkspaceDTO $workspaceDTO)
     {
-        if (! $this->getUser()) {
-            throw new AccessDeniedException("Vous ne pouvez pas ajouter de workspace");
+        return [
+            'name' => $workspaceDTO->getName(),
+            'description' => $workspaceDTO->getDescription(),
+        ];
+    }
+
+    public function hydrateWorkspace($data): WorkspaceDTO
+    {
+        return (new WorkspaceDTO())->setName($data['name'])->setDescription($data['description']);
+    }
+
+    #[LiveAction]
+    public function update()
+    {
+        if (! $this->isGranted('WORKSPACE_EDIT', $this->workspace)) {
+            throw new AccessDeniedException("Vous ne pouvez pas modifier ce workspace");
         }
 
         $this->submitForm();
 
         if ($this->getForm()->isValid()) {
             /* @var Workspace */
-            $workspace = WorkspaceMapper::workspaceFromDTO($this->getForm()->getData());
-            $workspace->setOwner($this->getUser());
+            $workspace = WorkspaceMapper::workspaceFromDTO($this->getForm()->getData(), $this->workspace);
             $this->workspaceManagementService->persist($workspace);
-            $this->addFlash('success', 'Workspace créé !');
+            $this->addFlash('success', 'Workspace modifié !');
 
-            return $this->redirectToRoute('workspace.index');
+            return $this->redirectToRoute('workspace.show', ['slug' => $workspace->getSlug()]);
         }
     }
 }

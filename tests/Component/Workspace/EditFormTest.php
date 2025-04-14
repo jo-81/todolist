@@ -5,14 +5,14 @@ namespace App\Tests\Component\Workspace;
 use App\Entity\User;
 use App\Entity\Workspace;
 use App\Tests\Trait\EntityFinderTrait;
-use App\Twig\Components\Workspace\Form;
+use App\Twig\Components\Workspace\EditForm;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\UX\LiveComponent\Test\InteractsWithLiveComponents;
 use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class FormTest extends WebTestCase
+class EditFormTest extends WebTestCase
 {
     use InteractsWithTwigComponents;
     use InteractsWithLiveComponents;
@@ -22,61 +22,66 @@ class FormTest extends WebTestCase
     /**
      * testRenderedComponent.
      */
-    public function testRenderedComponent(): void
+    public function testRenderedComponentForEdit(): void
     {
         $rendered = $this->renderTwigComponent(
-            name: Form::class,
+            name: EditForm::class,
+            data: ['workspace' => $this->getWorkspace()]
         );
 
-        $this->assertStringContainsString('workspace[name]', (string) $rendered);
-        $this->assertStringContainsString('workspace[description]', (string) $rendered);
+        $this->assertStringContainsString('Workspace 1', (string) $rendered);
     }
-    
-    /**
-     * testSubmitFormComponent
-     *
-     * @return void
-     */
-    public function testSubmitFormComponent(): void
+
+    public function testSubmitEditFormComponent(): void
     {
         $client = static::createClient();
         $user = $this->findOneEntityBy(User::class, ['email' => 'admin@domaine.fr']);
         $component = $this->createLiveComponent(
-            name: Form::class,
+            name: EditForm::class,
             client: $client,
+            data: ['workspace' => $this->getWorkspace()],
         );
 
         $component->actingAs($user);
         $component->submitForm(['workspace' => [
-            'name' => 'A new Workspace',
-            'description' => 'A description',
-        ]], 'save');
+            'name' => 'A update Workspace',
+        ]], 'update');
 
-        $newWorkspace = $this->findOneEntityBy(Workspace::class, ['name' => 'A new Workspace']);
+        $newWorkspace = $this->findOneEntityBy(Workspace::class, ['name' => 'A update Workspace']);
 
         self::assertInstanceOf(Workspace::class, $newWorkspace);
-        $client->followRedirect();
-        self::assertSelectorTextContains('.toast.text-bg-success', 'Workspace créé !');
+        $client->followRedirect("/workspaces/" . $newWorkspace->getSlug() );
+        self::assertSelectorTextContains('.toast.text-bg-success', 'Workspace modifié !');
     }
     
     /**
-     * testSubmitFormComponentWhenUserNotLogged
+     * testSubmitEditFormComponentWhenUserNotLogged
      *
      * @return void
      */
-    public function testSubmitFormComponentWhenUserNotLogged(): void
+    public function testSubmitEditFormComponentWhenUserNotLogged(): void
     {
         $this->expectException(AccessDeniedException::class);
 
         $client = static::createClient();
         $component = $this->createLiveComponent(
-            name: Form::class,
+            name: EditForm::class,
             client: $client,
+            data: ['workspace' => $this->getWorkspace()],
         );
 
         $component->submitForm(['workspace' => [
-            'name' => 'A new Workspace',
-            'description' => 'A description',
-        ]], 'save');
+            'name' => 'A update Workspace',
+        ]], 'update');
+    }
+    
+    /**
+     * getWorkspace
+     *
+     * @return Workspace
+     */
+    private function getWorkspace(): Workspace
+    {
+        return $this->findEntity(Workspace::class, 1);
     }
 }
