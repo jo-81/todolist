@@ -1,0 +1,6 @@
+App\Entity\Project:
+  project_{1..10}:
+    name: "Project <current()>"
+    description: "<text(400)>"
+    workspace: "@workspace_1"
+    archived: "<boolean(25)>"
