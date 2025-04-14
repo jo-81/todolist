@@ -14,7 +14,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[AsLiveComponent]
 final class EditForm extends AbstractController
@@ -36,6 +35,7 @@ final class EditForm extends AbstractController
     protected function instantiateForm(): FormInterface
     {
         $this->initialFormData = WorkspaceMapper::toWorkspaceDTO($this->workspace);
+
         return $this->createForm(WorkspaceType::class, $this->initialFormData);
     }
 
@@ -47,7 +47,7 @@ final class EditForm extends AbstractController
         ];
     }
 
-    public function hydrateWorkspace($data): WorkspaceDTO
+    public function hydrateWorkspace(array $data): WorkspaceDTO
     {
         return (new WorkspaceDTO())->setName($data['name'])->setDescription($data['description']);
     }
@@ -55,8 +55,8 @@ final class EditForm extends AbstractController
     #[LiveAction]
     public function update()
     {
-        if (! $this->isGranted('WORKSPACE_EDIT', $this->workspace)) {
-            throw new AccessDeniedException("Vous ne pouvez pas modifier ce workspace");
+        if (!$this->isGranted('WORKSPACE_EDIT', $this->workspace)) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier ce workspace.');
         }
 
         $this->submitForm();

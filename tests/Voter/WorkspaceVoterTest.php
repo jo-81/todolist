@@ -23,29 +23,25 @@ class WorkspaceVoterTest extends TestCase
         $this->workspace = $this->createMock(Workspace::class);
         $this->token = $this->createMock(TokenInterface::class);
     }
-    
+
     /**
-     * testUnauthenticatedUser
-     *
-     * @return void
+     * testUnauthenticatedUser.
      */
     public function testUnauthenticatedUser(): void
     {
         $this->token->method('getUser')->willReturn(null);
-        
+
         $result = $this->voter->vote(
             $this->token,
             $this->workspace,
             [WorkspaceVoter::REGISTER]
         );
-        
+
         $this->assertSame(VoterInterface::ACCESS_DENIED, $result);
     }
-    
+
     /**
-     * testRegisterPermission
-     *
-     * @return void
+     * testRegisterPermission.
      */
     public function testRegisterPermission(): void
     {
@@ -57,14 +53,12 @@ class WorkspaceVoterTest extends TestCase
             $this->workspace,
             [WorkspaceVoter::REGISTER]
         );
-        
+
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
-    
+
     /**
-     * testEditPermission
-     *
-     * @return void
+     * testEditPermission.
      */
     public function testEditPermission(): void
     {
@@ -76,7 +70,7 @@ class WorkspaceVoterTest extends TestCase
             $this->workspace,
             [WorkspaceVoter::EDIT]
         );
-        
+
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $result);
     }
 }

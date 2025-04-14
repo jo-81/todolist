@@ -17,11 +17,11 @@ final class WorkspaceVoter extends Voter
     {
         return in_array($attribute, [self::REGISTER, self::EDIT]) && $subject instanceof Workspace;
     }
-    
+
     /**
-     * voteOnAttribute
+     * voteOnAttribute.
      *
-     * @param  Workspace $subject
+     * @param Workspace $subject
      */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {

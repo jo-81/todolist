@@ -41,6 +41,17 @@ final class WorkspaceControllerTest extends WebTestCase
         self::assertResponseIsSuccessful();
     }
 
+    /**
+     * testRemoveWorkspaceWhenUserNotLogged.
+     */
+    public function testRemoveWorkspaceWhenUserNotLogged(): void
+    {
+        $client = static::createClient();
+        $client->request('DELETE', '/workspaces/remove/1');
+
+        self::assertResponseRedirects('/connexion');
+    }
+
     public static function getWorkspacePath(): array
     {
         return [
