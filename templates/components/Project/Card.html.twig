@@ -1,0 +1,22 @@
+<div{{ attributes.defaults({class: "col-12" }) }}>
+
+    <twig:Bootstrap:Card>
+        <twig:block name="content">
+            <small class="mb-2 d-block">{{ project.createdAt | date('d/m/Y') }}</small>
+            <h3 class="h6 fw-semibold mb-3">{{ project.name }}</h3>
+            {% if project.description %}
+            <p>{{ project.description }}</p>
+            {% endif %}
+            <p class="mb-0">
+                <a href="#" class="btn btn-sm btn-outline-primary">Consulter</a>
+            </p>
+            {% if project.archived %}
+                <p class="mt-4 mb-0" title="Archivé">
+                    <twig:Badge type="secondary">
+                        <twig:ux:icon name="tabler:archive" class="icon" />
+                    </twig:Badge>
+                </p>
+            {% endif %}
+        </twig:block>
+    </twig:Bootstrap:Card>
+</div>

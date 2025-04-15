@@ -1,0 +1,7 @@
+<div {{ attributes }}>
+    <select data-model="debounce(300)|{{ method }}" class="form-select" name="{{ name }}" id="{{ name }}">
+        {% for key, value in options %}
+            <option value="{{ key }}">{{ value }}</option>
+        {% endfor %}
+    </select>
+</div>
