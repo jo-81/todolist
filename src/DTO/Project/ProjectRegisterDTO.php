@@ -1,17 +1,17 @@
 <?php
 
-namespace App\DTO\Workspace;
+namespace App\DTO\Project;
 
 use App\Validator\Constraints\NameConstraint;
 use App\Validator\Constraints\DescriptionConstraint;
 
-final class WorkspaceDTO
+class ProjectRegisterDTO
 {
     #[NameConstraint]
     private string $name;
 
     #[DescriptionConstraint]
-    private ?string $description = null;
+    private ?string $description;
 
     public function getName(): string
     {
