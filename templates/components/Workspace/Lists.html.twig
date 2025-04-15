@@ -1,8 +1,14 @@
 <div{{ attributes.defaults({class: "row g-3"}) }}>
 
-    <p class="mb-0 fw-semibold">Nombre de projets : {{ this.workspaces.totalItemCount }}</p>
+    <p class="fw-semibold">Nombre de workspaces : {{ this.workspaces.totalItemCount }}</p>
 
-    <twig:Bootstrap:Form:Search placeholder="Rechercher un workspace"/>
+    {% if this.workspaces.totalItemCount != 0 %}
+    <twig:Bootstrap:Form:Container>
+        <twig:block name="content">
+            <twig:Bootstrap:Form:Search class="col-12 col-md-6 col-xl-4" placeholder="Rechercher un workspace" />
+        </twig:block>
+    </twig:Bootstrap:Form:Container>
+    {% endif %}
 
     {% for workspace in this.workspaces %}
         <twig:Workspace:Card key="workspace-{{ workspace.id }}" workspace="{{ workspace }}"/>

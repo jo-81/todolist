@@ -24,15 +24,15 @@ class WorkspaceRepository extends ServiceEntityRepository
      */
     public function findWorkspaceQuery(User $user, string $query)
     {
-        $qb = $this->createQueryBuilder('p')
-            ->andWhere('p.owner = :owner')
+        $qb = $this->createQueryBuilder('w')
+            ->andWhere('w.owner = :owner')
             ->setParameter('owner', $user)
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('w.createdAt', 'DESC')
         ;
 
         if (!empty($query)) {
             $qb
-                ->andWhere('p.name LIKE :query')
+                ->andWhere('w.name LIKE :query')
                 ->setParameter('query', '%'.$query.'%')
             ;
         }

@@ -1,0 +1,29 @@
+<div{{ attributes.defaults({class: "row g-3" }) }}>
+
+    <p class="fw-semibold">Nombre de projets : {{ this.projects.totalItemCount }}</p>
+
+    {% if this.projects.totalItemCount != 0 %}
+    <twig:Bootstrap:Form:Container>
+        <twig:block name="content">
+            <twig:Bootstrap:Form:Search class="col-12 col-md-6 col-xl-4 mb-2 mb-md-0" placeholder="Rechercher un projet" />
+            <twig:Bootstrap:Form:Select 
+                class="col-12 col-md-6 col-xl-4" 
+                name="archived" 
+                method="archived" 
+                options="{{ {
+                    '-1': 'Afficher tous les projets',
+                    '1': 'Afficher les projets archivés',
+                    '0': 'Afficher les projets non archivés'
+                } }}" />
+        </twig:block>
+    </twig:Bootstrap:Form:Container>
+    {% endif %}
+    
+    {% for project in this.projects %}
+        <twig:Project:Card key="project-{{ project.id }}" project="{{ project }}" />
+    {% else %}
+        <p>Vous n'avez pas encore créer de projet.</p>
+    {% endfor %}
+
+    {{ knp_pagination_render(this.projects) }}
+</div>

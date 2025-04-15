@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Twig\Components\Partials;
+namespace App\Twig\Components\Layout;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 

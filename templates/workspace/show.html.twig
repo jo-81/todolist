@@ -4,7 +4,7 @@
 
 {% block body %}
 <section>
-    <twig:Partials:HeaderPage title="{{ workspace.name }}">
+    <twig:Layout:HeaderPage title="{{ workspace.name }}">
         <twig:block name="content">
             <p>Créer le {{ workspace.createdAt|date('d/m/Y') }}</p>
             {% if workspace.description %}
@@ -22,16 +22,25 @@
                     data-bs-target="#workspaceRemove">Supprimer</button>
             </div>
         </twig:block>
-    </twig:Partials:HeaderPage>
+    </twig:Layout:HeaderPage>
+
+    <twig:Layout:ContentPage>
+        <twig:block name="content">
+            <twig:Project:Lists workspace="{{ workspace }}" />
+        </twig:block>
+    </twig:Layout:ContentPage>
 
     {% include "partials/_flashes.html.twig" %}
 
+    {# Modal de suppression #}
     <twig:Bootstrap:Modal title="Modifier un workspace" id="workspaceEdit">
         <twig:block name="content">
             <twig:Workspace:EditForm workspace="{{ workspace }}"/>
         </twig:block>
     </twig:Bootstrap:Modal>
+    {# Modal de suppression #}
 
+    {# Modal de modification #}
     <twig:Bootstrap:Modal title="Supprimer un workspace" id="workspaceRemove">
         <twig:block name="content">
             <form action="{{ path('workspace.remove', {id: workspace.id}) }}" method="POST">
@@ -44,5 +53,6 @@
             </form>
         </twig:block>
     </twig:Bootstrap:Modal>
+    {# Modal de modification #}
 </section>
 {% endblock %}

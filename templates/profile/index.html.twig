@@ -4,15 +4,15 @@
 
 {% block body %}
 <section>
-    <twig:Partials:HeaderPage title="Mon profil">
+    <twig:Layout:HeaderPage title="Mon profil">
         <twig:block name="content">
             <div>
                 <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
         </twig:block>
-    </twig:Partials:HeaderPage>
+    </twig:Layout:HeaderPage>
 
-    <twig:Partials:ContentPage>
+    <twig:Layout:ContentPage>
         <twig:block name="content">
             <div class="row g-4">
                 <section class="col-12 col-lg">
@@ -52,6 +52,6 @@
                 </aside>
             </div>
         </twig:block>
-    </twig:Partials:ContentPage>
+    </twig:Layout:ContentPage>
 </section>
 {% endblock %}
