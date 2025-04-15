@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block body %}
+    <section>
+        <twig:Layout:HeaderPage title="{{ project.name }}">
+            <twig:block name="content">
+                <p>Créer le {{ project.createdAt|date('d/m/Y') }}</p>
+
+                {% if project.archived %}
+                <p class="d-flex align-items-center gap-2" title="Archivé">
+                    <twig:Badge type="secondary">
+                        <twig:ux:icon name="tabler:archive" class="icon" />
+                    </twig:Badge>
+                    <span class="fw-semibold">Projet archivé</span>
+                </p>
+                {% endif %}
+
+                {% if project.description %}
+                    <p class="mb-0">{{ project.description }}</p>
+                {% endif %}
+            </twig:block>
+
+            <twig:block name="footer">
+                <div class="d-grid d-md-flex gap-2">
+                    <a href="{{ path('workspace.show', {slug: project.workspace.slug}) }}" class="btn btn-outline-primary">{{
+                        project.workspace.name }}
+                    </a>
+                    <a href="#" class="btn btn-primary">Modifier</a>
+                    <a href="#" class="btn btn-danger">Supprimer</a>
+                </div>
+            </twig:block>
+        </twig:Layout:HeaderPage>
+    
+        {% include "partials/_flashes.html.twig" %}
+    
+    </section>
+{% endblock %}
