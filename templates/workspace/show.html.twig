@@ -32,15 +32,15 @@
 
     {% include "partials/_flashes.html.twig" %}
 
-    {# Modal de suppression #}
+    {# Modal de modification #}
     <twig:Bootstrap:Modal title="Modifier un workspace" id="workspaceEdit">
         <twig:block name="content">
             <twig:Workspace:EditForm workspace="{{ workspace }}"/>
         </twig:block>
     </twig:Bootstrap:Modal>
-    {# Modal de suppression #}
-
     {# Modal de modification #}
+
+    {# Modal de suppression #}
     <twig:Bootstrap:Modal title="Supprimer un workspace" id="workspaceRemove">
         <twig:block name="content">
             <form action="{{ path('workspace.remove', {id: workspace.id}) }}" method="POST">
@@ -53,6 +53,6 @@
             </form>
         </twig:block>
     </twig:Bootstrap:Modal>
-    {# Modal de modification #}
+    {# Modal de suppression #}
 </section>
 {% endblock %}

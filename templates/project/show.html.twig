@@ -27,11 +27,19 @@
                     <a href="{{ path('workspace.show', {slug: project.workspace.slug}) }}" class="btn btn-outline-primary">{{
                         project.workspace.name }}
                     </a>
-                    <a href="#" class="btn btn-primary">Modifier</a>
+                    <button data-bs-toggle="modal" data-bs-target="#projectUpdate" class="btn btn-primary">Modifier</button>
                     <a href="#" class="btn btn-danger">Supprimer</a>
                 </div>
             </twig:block>
         </twig:Layout:HeaderPage>
+
+        {# Modal de modification #}
+        <twig:Bootstrap:Modal title="Modifier un projet" id="projectUpdate">
+            <twig:block name="content">
+                <twig:Project:UpdateForm project="{{ project }}"/>
+            </twig:block>
+        </twig:Bootstrap:Modal>
+        {# Modal de modification #}
     
         {% include "partials/_flashes.html.twig" %}
     

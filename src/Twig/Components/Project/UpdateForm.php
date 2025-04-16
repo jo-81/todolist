@@ -2,11 +2,11 @@
 
 namespace App\Twig\Components\Project;
 
+use App\Entity\Project;
 use App\Mapper\ProjectMapper;
 use App\DTO\Project\ProjectDTO;
-use App\Entity\Workspace;
+use App\Form\Project\ProjectUpdateType;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Form\Project\ProjectRegisterType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -16,27 +16,29 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[AsLiveComponent]
-final class RegisterForm extends AbstractController
+final class UpdateForm extends AbstractController
 {
     use DefaultActionTrait;
     use ComponentWithFormTrait;
 
-    #[LiveProp(writable: [LiveProp::IDENTITY, 'name', 'description'])]
+    #[LiveProp(writable: [LiveProp::IDENTITY, 'name', 'description', 'archived'])]
     public ?ProjectDTO $initialFormData = null;
 
     #[LiveProp()]
-    public Workspace $workspace;
+    public Project $project;
 
     public function __construct(private EntityManagerInterface $em)
     {}
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->createForm(ProjectRegisterType::class, $this->initialFormData);
+        $this->initialFormData = ProjectMapper::toProjectDTO($this->project);
+
+        return $this->createForm(ProjectUpdateType::class, $this->initialFormData);
     }
 
     #[LiveAction]
-    public function save()
+    public function update()
     {
         if (!$this->getUser()) {
             throw $this->createAccessDeniedException('Vous ne pouvez pas ajouter de projet.');
@@ -46,16 +48,14 @@ final class RegisterForm extends AbstractController
 
         if ($this->getForm()->isValid()) {
             /* @var Project */
-            $project = ProjectMapper::projectFromDTO($this->getForm()->getData());
-            $project->setArchived(false);
-            $project->setWorkspace($this->workspace);
+            $project = ProjectMapper::projectFromDTO($this->getForm()->getData(), $this->project);
 
             $this->em->persist($project);
             $this->em->flush();
 
-            $this->addFlash('success', 'Projet créé !');
+            $this->addFlash('success', 'Projet modifié !');
 
-            return $this->redirectToRoute('workspace.show', ['slug' => $this->workspace->getSlug()]);
+            return $this->redirectToRoute('project.single', ['slug' => $this->project->getSlug()]);
         }
     }
 }

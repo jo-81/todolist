@@ -7,29 +7,32 @@ use App\Entity\Project;
 use App\Entity\Workspace;
 use App\Tests\Trait\EntityFinderTrait;
 use App\Twig\Components\Project\RegisterForm;
+use App\Twig\Components\Project\UpdateForm;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\UX\LiveComponent\Test\InteractsWithLiveComponents;
 use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
 
-class RegisterFormTest extends WebTestCase
+class UpdateFormTest extends WebTestCase
 {
     use InteractsWithTwigComponents;
     use InteractsWithLiveComponents;
     use EntityFinderTrait;
     use ReloadDatabaseTrait;
 
-    public function testRenderedComponentRegisterForm(): void
+    public function testRenderedComponentUpdateForm(): void
     {
         $rendered = $this->renderTwigComponent(
-            name: RegisterForm::class,
-            data: ['workspace' => $this->getWorkspace()]
+            name: UpdateForm::class,
+            data: ['project' => $this->getProject()]
         );
 
-        $this->assertStringContainsString('project_register[name]', (string) $rendered);
+        $this->assertStringContainsString('project_update[name]', (string) $rendered);
         $this->assertStringContainsString('Nombre de caractères : entre 3 et 20.', (string) $rendered);
-        $this->assertStringContainsString('project_register[description]', (string) $rendered);
+        $this->assertStringContainsString('project_update[description]', (string) $rendered);
         $this->assertStringContainsString('Nombre de caractères restant', (string) $rendered);
+        $this->assertStringContainsString('Archivé ?', (string) $rendered);
+        $this->assertStringContainsString('project_update[archived]', (string) $rendered);
     }
 
     /**
@@ -40,26 +43,27 @@ class RegisterFormTest extends WebTestCase
         $client = static::createClient();
         $user = $this->findOneEntityBy(User::class, ['email' => 'admin@domaine.fr']);
         $component = $this->createLiveComponent(
-            name: RegisterForm::class,
+            name: UpdateForm::class,
             client: $client,
-            data: ['workspace' => $this->getWorkspace()]
+            data: ['project' => $this->getProject()]
         );
 
         $component->actingAs($user);
-        $component->submitForm(['project_register' => [
-            'name' => 'A new project',
-            'description' => 'A description',
-        ]], 'save');
+        $component->submitForm(['project_update' => [
+            'name' => 'project update',
+            'description' => 'A description update',
+            'archived' => true,
+        ]], 'update');
 
-        $newProject = $this->findOneEntityBy(Project::class, ['name' => 'A new project']);
+        $newProject = $this->findOneEntityBy(Project::class, ['name' => 'project update']);
 
         self::assertInstanceOf(Project::class, $newProject);
-        $client->followRedirect('/workspaces/workspace-1');
-        self::assertSelectorTextContains('.toast.text-bg-success', 'Projet créé !');
+        $client->followRedirect('/projects/project-update');
+        self::assertSelectorTextContains('.toast.text-bg-success', 'Projet modifié !');
     }
 
-    private function getWorkspace(): Workspace
+    private function getProject(): Project
     {
-        return $this->findEntity(Workspace::class, 1);
+        return $this->findEntity(Project::class, 1);
     }
 }
