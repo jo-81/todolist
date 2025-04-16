@@ -1,22 +1,32 @@
-<div{{ attributes.defaults({class: "row g-3" }) }}>
+<div {{ attributes.defaults({class: "row g-3" }) }}>
 
-    <p class="fw-semibold">Nombre de projets : {{ this.projects.totalItemCount }}</p>
+    <div class="d-flex align-items-center gap-2">
+        <twig:Badge 
+            class="cursor"
+            type="primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#projectRegister">
+            <twig:ux:icon name="tabler:plus" class="icon" />
+        </twig:Badge>
+
+        <p class="fw-semibold mb-0">Nombre de projets : {{ this.projects.totalItemCount }}</p>
+    </div>
 
     {% if this.projects.totalItemCount != 0 %}
-    <twig:Bootstrap:Form:Container>
-        <twig:block name="content">
-            <twig:Bootstrap:Form:Search class="col-12 col-md-6 col-xl-4 mb-2 mb-md-0" placeholder="Rechercher un projet" />
-            <twig:Bootstrap:Form:Select 
-                class="col-12 col-md-6 col-xl-4" 
-                name="archived" 
-                method="archived" 
-                options="{{ {
-                    '-1': 'Afficher tous les projets',
-                    '1': 'Afficher les projets archivés',
-                    '0': 'Afficher les projets non archivés'
-                } }}" />
-        </twig:block>
-    </twig:Bootstrap:Form:Container>
+        <twig:Bootstrap:Form:Container>
+            <twig:block name="content">
+                <twig:Bootstrap:Form:Search class="col-12 col-md-6 col-xl-4 mb-2 mb-md-0" placeholder="Rechercher un projet" />
+                <twig:Bootstrap:Form:Select 
+                    class="col-12 col-md-6 col-xl-4" 
+                    name="archived" 
+                    method="archived" 
+                    options="{{ {
+                        '-1': 'Afficher tous les projets',
+                        '1': 'Afficher les projets archivés',
+                        '0': 'Afficher les projets non archivés'
+                    } }}" />
+            </twig:block>
+        </twig:Bootstrap:Form:Container>
     {% endif %}
     
     {% for project in this.projects %}
@@ -26,4 +36,12 @@
     {% endfor %}
 
     {{ knp_pagination_render(this.projects) }}
+
+    {# Modal d'ajout de projet #}
+    <twig:Bootstrap:Modal title="Ajouter un projet" id="projectRegister">
+        <twig:block name="content">
+            <twig:Project:RegisterForm workspace="{{ workspace }}"/>
+        </twig:block>
+    </twig:Bootstrap:Modal>
+    {# Modal d'ajout de projet #}
 </div>

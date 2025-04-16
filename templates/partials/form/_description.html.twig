@@ -1,0 +1,9 @@
+<div data-controller="character-counter" data-character-counter-countdown-value="true" class="mb-3">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+    {{ form_help(form.description) }}
+    {{ form_errors(form.description) }}
+    <small class="d-block mt-2">
+        Nombre de caractères restant : <span data-character-counter-target="counter">0</span>
+    </small>
+</div>

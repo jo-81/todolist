@@ -18,7 +18,7 @@ final class Badge
         $resolver->setIgnoreUndefined(true);
 
         $resolver->setDefaults(['type' => 'primary']);
-        $resolver->setAllowedValues('type', ['success', 'danger', 'info', 'warning', 'secondary']);
+        $resolver->setAllowedValues('type', ['success', 'danger', 'info', 'warning', 'secondary', 'primary']);
 
         return $resolver->resolve($data) + $data;
     }

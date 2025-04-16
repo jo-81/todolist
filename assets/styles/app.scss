@@ -19,6 +19,10 @@ $modal-content-border-width: 0;
     height: 24px;
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 @import '../../vendor/thomaspark/bootswatch/dist/pulse/variables';
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 @import '../../vendor/thomaspark/bootswatch/dist/pulse/bootswatch';

@@ -1,0 +1,17 @@
+<div{{ attributes.defaults({class: "mb-3"}) }}>
+    {{ form_start(form, {
+        'attr': {
+        'data-action': 'live#action:prevent',
+        'data-live-action-param': 'save'
+        }
+    }) }}
+        {{ form_row(form.name) }}
+        
+        {{ form_row(form.description) }}
+        
+        <button data-loading="action(save)|addAttribute(disabled)" class="btn btn-sm btn-primary"
+            type="submit">Enregistrer</button>
+        
+    {{ form_end(form) }}
+    </div>
+</div>
