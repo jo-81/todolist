@@ -28,7 +28,7 @@
                         project.workspace.name }}
                     </a>
                     <button data-bs-toggle="modal" data-bs-target="#projectUpdate" class="btn btn-primary">Modifier</button>
-                    <a href="#" class="btn btn-danger">Supprimer</a>
+                    <button data-bs-toggle="modal" data-bs-target="#projectRemove" class="btn btn-danger">Supprimer</button>
                 </div>
             </twig:block>
         </twig:Layout:HeaderPage>
@@ -40,6 +40,21 @@
             </twig:block>
         </twig:Bootstrap:Modal>
         {# Modal de modification #}
+
+        {# Modal de suppression #}
+        <twig:Bootstrap:Modal title="Supprimer un projet" id="projectRemove">
+            <twig:block name="content">
+                <form action="{{ path('project.remove', {id: project.id}) }}" method="POST">
+        
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('project_remove') }}">
+        
+                    <p>Confirmez la suppression de votre projet ?</p>
+                    <button type="submit" class="btn btn-sm btn-primary">Oui</button>
+                </form>
+            </twig:block>
+        </twig:Bootstrap:Modal>
+        {# Modal de suppression #}
     
         {% include "partials/_flashes.html.twig" %}
     
