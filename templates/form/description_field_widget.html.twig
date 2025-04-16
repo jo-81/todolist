@@ -1,0 +1,9 @@
+{% block description_field_widget %}
+    <div data-controller="character-counter" data-character-counter-countdown-value="true" class="mb-3">
+        <textarea  
+            {{ block('widget_attributes') }}>{% if value is not empty %}{{ value }}" {% endif %}</textarea>
+        <small class="d-block mt-2">
+            Nombre de caractères restant : <span data-character-counter-target="counter">0</span>
+        </small>
+    </div>
+{% endblock %}
