@@ -5,13 +5,20 @@ namespace App\DTO\Project;
 use App\Validator\Constraints\NameConstraint;
 use App\Validator\Constraints\DescriptionConstraint;
 
-class ProjectRegisterDTO
+class ProjectDTO
 {
     #[NameConstraint]
     private string $name;
 
     #[DescriptionConstraint]
-    private ?string $description;
+    private ?string $description = null;
+
+    private bool $archived;
+
+    public function __construct()
+    {
+        $this->archived = false;
+    }
 
     public function getName(): string
     {
@@ -33,6 +40,18 @@ class ProjectRegisterDTO
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(bool $archived): static
+    {
+        $this->archived = $archived;
 
         return $this;
     }

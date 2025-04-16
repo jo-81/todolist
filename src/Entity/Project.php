@@ -33,11 +33,16 @@ class Project
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
-    private ?bool $archived = null;
+    private bool $archived;
 
     #[ORM\ManyToOne(inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Workspace $workspace = null;
+
+    public function __construct()
+    {
+        $this->archived = false;
+    }
 
     public function getId(): ?int
     {
@@ -92,7 +97,7 @@ class Project
         return $this;
     }
 
-    public function isArchived(): ?bool
+    public function isArchived(): bool
     {
         return $this->archived;
     }

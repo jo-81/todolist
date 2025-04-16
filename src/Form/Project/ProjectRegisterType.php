@@ -3,7 +3,7 @@
 namespace App\Form\Project;
 
 use App\Form\Type\NameFieldType;
-use App\DTO\Project\ProjectRegisterDTO;
+use App\DTO\Project\ProjectDTO;
 use App\Form\Type\DescriptionFieldType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +26,7 @@ class ProjectRegisterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ProjectRegisterDTO::class,
+            'data_class' => ProjectDTO::class,
         ]);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Tests\DTO;
 
-use App\DTO\Project\ProjectRegisterDTO;
+use App\DTO\Project\ProjectDTO;
 
-class ProjectRegisterDTOTest extends AbstractDTOTest
+class ProjectDTOTest extends AbstractDTOTest
 {    
     /**
      * testGoodEntity
@@ -70,9 +70,9 @@ class ProjectRegisterDTOTest extends AbstractDTOTest
         $this->assertEquals($validationResults['messages'][0], 'Le contenu contient des éléments non autorisés.');
     }
 
-    private function getEntity(): ProjectRegisterDTO
+    private function getEntity(): ProjectDTO
     {
-        return (new ProjectRegisterDTO())
+        return (new ProjectDTO())
             ->setName('Projet 11')
             ->setDescription('Une description du projet 11')
         ;
