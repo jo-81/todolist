@@ -45,6 +45,7 @@ final class ProjectControllerTest extends WebTestCase
     {
         return [
             ['GET', '/projects/project-1'],
+            ['DELETE', '/projects/project-1'],
         ];
     }
 }
