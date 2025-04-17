@@ -2,30 +2,23 @@
 
 namespace App\Form\Workspace;
 
+use App\Form\Type\NameFieldType;
 use App\DTO\Workspace\WorkspaceDTO;
+use App\Form\Type\DescriptionFieldType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class WorkspaceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Nom du workspace',
-                'help' => 'Nombre de caractères : entre 3 et 20.',
+            ->add('name', NameFieldType::class, [
+                'label' => 'Nom du projet',
             ])
-            ->add('description', TextareaType::class, [
-                'required' => false,
-                'help' => 'Champ optionnel.',
-                'attr' => [
-                    'rows' => 5,
-                    'data-character-counter-target' => 'input',
-                    'maxlength' => 400,
-                ],
+            ->add('description', DescriptionFieldType::class, [
+                'label' => 'Description',
             ])
         ;
     }
