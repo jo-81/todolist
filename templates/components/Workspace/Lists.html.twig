@@ -1,4 +1,4 @@
-<div{{ attributes.defaults({class: "row g-3"}) }}>
+<div{{ attributes }}>
 
     <p class="fw-semibold">Nombre de workspaces : {{ this.workspaces.totalItemCount }}</p>
 
@@ -10,11 +10,13 @@
     </twig:Bootstrap:Form:Container>
     {% endif %}
 
-    {% for workspace in this.workspaces %}
-        <twig:Workspace:Card key="workspace-{{ workspace.id }}" workspace="{{ workspace }}"/>
-        {% else %}
-        <p>Vous n'avez pas encore créer de Workspace</p>
-    {% endfor %}
+    <div class="mb-2 d-flex flex-wrap gap-2" data-loading="addClass(opacity-50)">
+        {% for workspace in this.workspaces %}
+            <twig:Workspace:Card key="workspace-{{ workspace.id }}" workspace="{{ workspace }}"/>
+            {% else %}
+            <p>Vous n'avez pas encore créer de Workspace</p>
+        {% endfor %}
+    </div>
 
     {{ knp_pagination_render(this.workspaces) }}
 </div>
