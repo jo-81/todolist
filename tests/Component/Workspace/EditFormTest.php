@@ -20,7 +20,7 @@ class EditFormTest extends WebTestCase
     use ReloadDatabaseTrait;
 
     /**
-     * testRenderedComponent.
+     * testRenderedComponentForEdit.
      */
     public function testRenderedComponentForEdit(): void
     {

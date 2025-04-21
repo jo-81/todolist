@@ -29,7 +29,7 @@ class DescriptionConstraint extends Compound
                         message: 'Le contenu doit être une chaîne de caractères.'
                     ),
                 ],
-            ])
+            ]),
         ];
     }
 }

@@ -23,7 +23,6 @@ class DescriptionFieldType extends AbstractType
         $view->vars['attr']['class'] = 'form-control';
         $view->vars['attr']['data-character-counter-target'] = 'input';
         $view->vars['attr']['maxlength'] = 400;
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

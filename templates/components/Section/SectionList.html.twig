@@ -1,0 +1,27 @@
+<section {{ attributes }}>
+    {% if not this.sections|length is empty %}
+    {# Titre #}
+    <header class="mb-3">
+        <h3 class="mb-0 h6 fw-semibold">Nombre de sections : {{ this.sections|length }}</h3>
+    </header>
+    {# Titre #}
+
+    {# Filtre et recherche #}
+    <twig:Bootstrap:Form:Container>
+        <twig:block name="content">
+            <twig:Bootstrap:Form:Search class="col-12 col-md-6 col-xl-4" placeholder="Rechercher une section" />
+        </twig:block>
+    </twig:Bootstrap:Form:Container>
+    {% else %}
+        <p>Aucunes sections d'enregistrées pour ce projet.</p>
+    {% endif %}
+    {# Filtre et recherche #}
+
+    {# Liste des sections #}
+    <div class="mb-2 d-flex flex-wrap gap-2" data-loading="addClass(opacity-50)">
+        {% for section in this.sections %}
+            <twig:Section:SectionCard section="{{ section }}"/>
+        {% endfor %}
+    </div>
+    {# Liste des sections #}
+</section>

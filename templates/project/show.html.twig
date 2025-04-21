@@ -33,6 +33,12 @@
             </twig:block>
         </twig:Layout:HeaderPage>
 
+        <twig:Layout:ContentPage>
+            <twig:block name="content">
+                <twig:Section:SectionList project="{{ project }}"/>
+            </twig:block>
+        </twig:Layout:ContentPage>
+
         {# Modal de modification #}
         <twig:Bootstrap:Modal title="Modifier un projet" id="projectUpdate">
             <twig:block name="content">

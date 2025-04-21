@@ -27,3 +27,10 @@ services:
         arguments: ['@request_stack']
         tags:
             - { name: 'kernel.event_subscriber' }
+
+    App\Security\LiveComponent\LiveComponentSecurityHandler:
+        arguments:
+            $authorizationChecker: '@security.authorization_checker'
+            
+    App\EventSubscriber\LiveComponentSecuritySubscriber:
+        tags: ['kernel.event_subscriber']
