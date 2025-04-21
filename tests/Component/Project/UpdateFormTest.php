@@ -4,9 +4,7 @@ namespace App\Tests\Component\Project;
 
 use App\Entity\User;
 use App\Entity\Project;
-use App\Entity\Workspace;
 use App\Tests\Trait\EntityFinderTrait;
-use App\Twig\Components\Project\RegisterForm;
 use App\Twig\Components\Project\UpdateForm;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;

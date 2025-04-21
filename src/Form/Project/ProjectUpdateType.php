@@ -20,7 +20,7 @@ class ProjectUpdateType extends AbstractType
                 'choices' => [
                     'Oui' => true,
                     'Non' => false,
-                ]
+                ],
             ])
         ;
     }

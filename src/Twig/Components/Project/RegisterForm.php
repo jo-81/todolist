@@ -2,9 +2,9 @@
 
 namespace App\Twig\Components\Project;
 
+use App\Entity\Workspace;
 use App\Mapper\ProjectMapper;
 use App\DTO\Project\ProjectDTO;
-use App\Entity\Workspace;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\Project\ProjectRegisterType;
 use Symfony\Component\Form\FormInterface;
@@ -28,7 +28,8 @@ final class RegisterForm extends AbstractController
     public Workspace $workspace;
 
     public function __construct(private EntityManagerInterface $em)
-    {}
+    {
+    }
 
     protected function instantiateForm(): FormInterface
     {

@@ -28,7 +28,8 @@ final class UpdateForm extends AbstractController
     public Project $project;
 
     public function __construct(private EntityManagerInterface $em)
-    {}
+    {
+    }
 
     protected function instantiateForm(): FormInterface
     {

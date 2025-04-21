@@ -26,7 +26,6 @@ class ProjectMapper
             ->setName($project->getName())
             ->setDescription($project->getDescription())
             ->setArchived($project->isArchived());
-        ;
 
         return $dto;
     }

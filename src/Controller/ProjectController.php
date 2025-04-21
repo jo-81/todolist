@@ -13,7 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class ProjectController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em)
-    {}
+    {
+    }
 
     #[Route('/projects/{slug}', name: 'project.single', methods: ['GET'], priority: 5)]
     public function show(#[MapEntity(mapping: ['slug' => 'slug'])] Project $project): Response
@@ -33,7 +34,6 @@ final class ProjectController extends AbstractController
         }
 
         try {
-
             $workspace = $project->getWorkspace();
 
             $this->em->remove($project);

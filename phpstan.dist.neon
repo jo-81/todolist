@@ -17,6 +17,8 @@ parameters:
         - identifier: missingType.return
         - identifier: missingType.property
         - identifier: arguments.count
+        - identifier: property.onlyWritten
+        - identifier: method.nonObject
         - '#Unreachable statement#'
 
     paths:

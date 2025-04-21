@@ -5,11 +5,9 @@ namespace App\Tests\DTO;
 use App\DTO\Project\ProjectDTO;
 
 class ProjectDTOTest extends AbstractDTOTest
-{    
+{
     /**
-     * testGoodEntity
-     *
-     * @return void
+     * testGoodEntity.
      */
     public function testGoodEntity(): void
     {
@@ -17,11 +15,9 @@ class ProjectDTOTest extends AbstractDTOTest
 
         $this->assertEquals(0, $validationResults['count']);
     }
-    
+
     /**
-     * testInvalidPropertyName
-     *
-     * @return void
+     * testInvalidPropertyName.
      */
     public function testInvalidPropertyName(): void
     {

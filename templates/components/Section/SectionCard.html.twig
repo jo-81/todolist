@@ -1,0 +1,8 @@
+<div {{ attributes.defaults({class: "col-12"}) }}>
+    <twig:Bootstrap:Card class="bg-secondary bg-opacity-10">
+        <twig:block name="content">
+            <h4 class="h6 fw-semibold">{{ section.name }}</h4>
+            <p class="mb-0">{{ section.description }}</p>
+        </twig:block>
+    </twig:Bootstrap:Card>
+</div>
