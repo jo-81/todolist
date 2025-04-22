@@ -47,7 +47,7 @@ class SectionListsTest extends WebTestCase
             data: ['project' => $this->findEntity(Project::class, 1)],
             client: $client,
         );
-        
+
         $component->render();
     }
 }

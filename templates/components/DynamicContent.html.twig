@@ -1,0 +1,22 @@
+<div {{ attributes.defaults({class: 'mb-2'}) }}>
+    {% if not isVisible %}
+        <button 
+            type="button" 
+            data-action="live#action" 
+            data-live-action-param="toggleVisibility" 
+            class="btn btn-primary">
+            <twig:ux:icon name="tabler:plus" class="icon" /> une section
+        </button>
+    {% else %}
+        <div class="mb-2">
+            <button 
+                type="button" 
+                data-action="live#action" 
+                data-live-action-param="toggleVisibility" 
+                class="btn btn-outline-primary d-block mb-2">
+                Masquer
+            </button>
+            {% block content %}{% endblock %}
+        </div>
+    {% endif %}
+</div>
