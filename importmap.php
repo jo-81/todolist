@@ -34,4 +34,14 @@ return [
     '@stimulus-components/character-counter' => [
         'version' => '5.1.0',
     ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
+    'bootstrap' => [
+        'version' => '5.3.5',
+    ],
+    'bootstrap/dist/css/bootstrap.min.css' => [
+        'version' => '5.3.5',
+        'type' => 'css',
+    ],
 ];

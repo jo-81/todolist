@@ -20,4 +20,10 @@ class SectionService
         $this->em->persist($section);
         $this->em->flush();
     }
+
+    public function remove(Section $section)
+    {
+        $this->em->remove($section);
+        $this->em->flush();
+    }
 }
