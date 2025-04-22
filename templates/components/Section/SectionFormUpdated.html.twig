@@ -1,0 +1,16 @@
+<div{{ attributes }}>
+    {{ form_start(form, {
+    'attr': {
+        'data-action': 'live#action:prevent',
+        'data-live-action-param': 'updated'
+    }
+    }) }}
+    {{ form_row(form.name) }}
+
+    {{ form_row(form.description) }}
+
+    <button data-loading="action(updated)|addAttribute(disabled)" class="btn btn-sm btn-primary"
+        type="submit">Modifier</button>
+
+    {{ form_end(form) }}
+    </div>

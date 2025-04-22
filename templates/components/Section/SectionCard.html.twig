@@ -1,22 +1,43 @@
 <div {{ attributes.defaults({class: "col-12"}) }}>
     <twig:Bootstrap:Card class="bg-secondary bg-opacity-10">
         <twig:block name="content" class="position-relative">
-            <header class="d-flex justify-content-between align-items-center">
-                <h4 class="h6 fw-semibold mb-0">{{ section.name }}</h4>
-                <button class="btn btn-link" data-action='live#action' data-live-action-param='toggleVisibility'>
-                    <twig:ux:icon name="tabler:trash" class="icon text-danger" />
-                </button>
-            </header>
-            {% if section.description %}
-                <p class="mb-0 mt-3">{{ section.description }}</p>
-            {% endif %}
+            {% if not isVisibleUpdatedForm %}
+                <header class="d-flex justify-content-between align-items-center">
+                    <h4 class="h6 fw-semibold mb-0">{{ section.name }}</h4>
+                    <div class="d-flex gap-1">
+                        <button 
+                            data-action='live#action' 
+                            data-live-action-param='toggleVisibilityUpdatedForm'
+                            class="btn btn-outline-primary btn-sm" 
+                        >
+                            <twig:ux:icon name="tabler:edit" class="icon" />
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm" data-action='live#action' data-live-action-param='toggleVisibility'>
+                            <twig:ux:icon name="tabler:trash" class="icon" />
+                        </button>
+                    </div>
+                </header>
 
-            {% if isVisible %}
-            <div class="bg-danger bg-opacity-10 p-2 d-inline-flex gap-2 mt-3 align-items-center">
-                <span class="fw-semibold">Confirmer la suppression ?</span> 
-                <button class="btn btn-danger btn-sm" data-action='live#action' data-live-action-param='remove'>Oui</button>
-                <button class="btn btn-primary btn-sm" data-action='live#action' data-live-action-param='toggleVisibility'>Non</button>
-            </div>
+                {% if section.description %}
+                    <p class="mb-0 mt-3">{{ section.description }}</p>
+                {% endif %}
+
+                {% if isVisible %}
+                <div class="bg-danger bg-opacity-10 p-2 d-inline-flex gap-2 mt-3 align-items-center">
+                    <span class="fw-semibold">Confirmer la suppression ?</span> 
+                    <button class="btn btn-danger btn-sm" data-action='live#action' data-live-action-param='remove'>Oui</button>
+                    <button class="btn btn-primary btn-sm" data-action='live#action' data-live-action-param='toggleVisibility'>Non</button>
+                </div>
+                {% endif %}
+
+            {% else %}
+                <div class="d-flex justify-content-end">
+                    <button data-action='live#action' data-live-action-param='toggleVisibilityUpdatedForm'
+                        class="btn btn-outline-primary btn-sm">
+                        <twig:ux:icon name="tabler:edit" class="icon" />
+                    </button>
+                </div>
+                <twig:Section:SectionFormUpdated section="{{ section }}" />
             {% endif %}
         </twig:block>
     </twig:Bootstrap:Card>

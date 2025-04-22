@@ -2,13 +2,11 @@
 
 namespace App\Twig\Components\Section;
 
-use App\Entity\Project;
 use App\Entity\Section;
 use App\Mapper\SectionMapper;
 use App\DTO\Section\SectionDTO;
 use App\Service\SectionService;
 use App\Form\Section\SectionType;
-use App\Repository\SectionRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -22,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[IsGranted('ROLE_USER')]
 #[AsLiveComponent]
-final class SectionForm extends AbstractController
+final class SectionFormUpdated extends AbstractController
 {
     use DefaultActionTrait;
     use ComponentWithFormTrait;
@@ -30,18 +28,14 @@ final class SectionForm extends AbstractController
 
     public function __construct(
         private SectionService $sectionService,
-        private SectionRepository $sectionRepository,
     ) {
     }
 
     #[LiveProp(writable: [LiveProp::IDENTITY, 'name', 'description'])]
-    public ?SectionDTO $initialFormData = null;
-
-    #[LiveProp()]
-    public Project $project;
+    public SectionDTO $initialFormData;
 
     #[LiveProp(fieldName: 'sectionFormUpdated')]
-    public ?Section $section = null;
+    public Section $section;
 
     #[PreMount]
     public function preMount(array $data): array
@@ -61,20 +55,17 @@ final class SectionForm extends AbstractController
     }
 
     #[LiveAction]
-    public function save()
+    public function updated()
     {
         $this->submitForm();
 
         if ($this->getForm()->isValid()) {
             /* @var Section */
             $section = SectionMapper::sectionFromDTO($this->getForm()->getData(), $this->section);
-            $section->setProject($this->project);
 
             $this->sectionService->persist($section);
 
-            $this->addFlash('success', 'Section créé !');
-
-            return $this->redirectToRoute('project.single', ['slug' => $this->project->getSlug()]);
+            $this->emitUp("section:updated");
         }
     }
 }
