@@ -28,11 +28,19 @@
     </div>
     {# Liste des sections #}
 
-    {# Modal d'ajout de section #}
+    {# Modal d'ajout d'une section #}
     <twig:Bootstrap:Modal title="Ajouter une section" id="sectionRegister">
         <twig:block name="content">
             <twig:Section:SectionForm project="{{ project }}" />
         </twig:block>
     </twig:Bootstrap:Modal>
-    {# Modal d'ajout de section #}
+    {# Modal d'ajout d'une section #}
+
+    {# Modal de modification d'une section #}
+    <twig:Bootstrap:Modal title="Modifier une section" id="sectionUpdate">
+        <twig:block name="content">
+            <twig:Section:SectionForm project="{{ project }}" />
+        </twig:block>
+    </twig:Bootstrap:Modal>
+    {# Modal de modification d'une section #}
 </section>

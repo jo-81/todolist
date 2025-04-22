@@ -10,6 +10,7 @@ use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 
 #[IsGranted('ROLE_USER')]
 #[AsLiveComponent]
@@ -20,6 +21,9 @@ final class SectionCard
 
     #[LiveProp()]
     public bool $isVisible = false;
+
+    #[LiveProp()]
+    public bool $isVisibleUpdatedForm = false;
 
     public function __construct(private SectionService $sectionService)
     {
@@ -39,5 +43,17 @@ final class SectionCard
     public function toggleVisibility()
     {
         $this->isVisible = !$this->isVisible;
+    }
+
+    #[LiveAction]
+    public function toggleVisibilityUpdatedForm()
+    {
+        $this->isVisibleUpdatedForm = !$this->isVisibleUpdatedForm;
+    }
+
+    #[LiveListener("section:updated")]
+    public function toggleVisibilityUpdatedFormWhenUpdated()
+    {
+        $this->isVisibleUpdatedForm = false;
     }
 }
