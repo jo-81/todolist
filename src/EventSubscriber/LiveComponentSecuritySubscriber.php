@@ -16,11 +16,11 @@ class LiveComponentSecuritySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            PreRenderEvent ::class => ['onPreMount', 10],
+            PreRenderEvent::class => ['onPreMount', 10],
         ];
     }
 
-    public function onPreMount(PreRenderEvent  $event): void
+    public function onPreMount(PreRenderEvent $event): void
     {
         $component = $event->getComponent();
         $this->securityHandler->handleComponentSecurity($component);

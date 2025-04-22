@@ -16,12 +16,10 @@ class SectionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Section::class);
     }
-    
+
     /**
-     * findSectionsQuery
+     * findSectionsQuery.
      *
-     * @param  Project $project
-     * @param  string $query
      * @return Section[]
      */
     public function findSectionsQuery(Project $project, string $query)

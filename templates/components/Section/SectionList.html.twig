@@ -1,7 +1,10 @@
 <section {{ attributes }}>
     {% if not this.sections|length is empty %}
     {# Titre #}
-    <header class="mb-3">
+    <header class="d-flex align-items-center gap-2 mb-3">
+        <twig:Badge class="cursor" type="primary" data-bs-toggle="modal" data-bs-target="#sectionRegister">
+            <twig:ux:icon name="tabler:plus" class="icon" />
+        </twig:Badge>
         <h3 class="mb-0 h6 fw-semibold">Nombre de sections : {{ this.sections|length }}</h3>
     </header>
     {# Titre #}
@@ -24,4 +27,10 @@
         {% endfor %}
     </div>
     {# Liste des sections #}
+
+    <twig:Bootstrap:Modal title="Ajouter une section" id="sectionRegister">
+        <twig:block name="content">
+            <twig:Section:SectionForm project="{{ project }}" />
+        </twig:block>
+    </twig:Bootstrap:Modal>
 </section>
