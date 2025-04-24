@@ -40,7 +40,7 @@ final class SectionFormUpdated extends AbstractController
     #[PreMount]
     public function preMount(array $data): array
     {
-        if (! isset($data['section'])) {
+        if (!isset($data['section'])) {
             return $data;
         }
 
@@ -65,7 +65,7 @@ final class SectionFormUpdated extends AbstractController
 
             $this->sectionService->persist($section);
 
-            $this->emitUp("section:updated");
+            $this->emitUp('section:updated');
         }
     }
 }

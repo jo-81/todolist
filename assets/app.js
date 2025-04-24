@@ -7,10 +7,3 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
-import { Popover } from "bootstrap";
-
-// Activation manuelle des popovers
-document
-    .querySelectorAll('[data-bs-toggle="popover"]')
-    .forEach((popover) => new Popover(popover));

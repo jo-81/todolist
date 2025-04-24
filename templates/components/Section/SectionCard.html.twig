@@ -1,6 +1,9 @@
 <div {{ attributes.defaults({class: "col-12"}) }}>
-    <twig:Bootstrap:Card class="bg-secondary bg-opacity-10">
-        <twig:block name="content" class="position-relative">
+    <twig:Bootstrap:Card 
+        class="bg-secondary bg-opacity-10" 
+        id="accordion-{{ section.id }}" 
+    >
+        <twig:block name="content">
             {% if not isVisibleUpdatedForm %}
                 <header class="d-flex justify-content-between align-items-center">
                     <h4 class="h6 fw-semibold mb-0">{{ section.name }}</h4>
@@ -12,6 +15,7 @@
                         >
                             <twig:ux:icon name="tabler:edit" class="icon" />
                         </button>
+
                         <button class="btn btn-outline-danger btn-sm" data-action='live#action' data-live-action-param='toggleVisibility'>
                             <twig:ux:icon name="tabler:trash" class="icon" />
                         </button>
@@ -39,6 +43,8 @@
                 </div>
                 <twig:Section:SectionFormUpdated section="{{ section }}" />
             {% endif %}
+
+            <twig:Task:TaskList section="{{ section }}" />
         </twig:block>
     </twig:Bootstrap:Card>
 </div>
