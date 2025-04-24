@@ -1,0 +1,18 @@
+App\Entity\Task:
+  task_{1..5}:
+    title: Task <current()>
+    content: <text(600)>
+    archived: "<boolean(25)>"
+    section: "@section_1"
+    status: "<getStatus(todo)>"
+    priority: "<getPriority(low)>"
+    limitedAt: "<(rand(0, 9) === 0 ? new DateTimeImmutable('now') : null)>"
+
+  task_{6..10}:
+    title: Task <current()>
+    content: <text(600)>
+    archived: "<boolean(25)>"
+    section: "@section_2"
+    status: "<getStatus(todo)>"
+    priority: "<getPriority(low)>"
+    limitedAt: "<(rand(0, 9) === 0 ? new DateTimeImmutable('now') : null)>"

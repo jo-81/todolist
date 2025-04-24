@@ -46,7 +46,7 @@ final class SectionForm extends AbstractController
     #[PreMount]
     public function preMount(array $data): array
     {
-        if (! isset($data['section'])) {
+        if (!isset($data['section'])) {
             return $data;
         }
 
