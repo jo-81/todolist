@@ -1,0 +1,24 @@
+<div {{ attributes }}>
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-12 col-lg-8 mb-3 mb-lg-0">
+            {{ form_row(form.title) }}
+            
+            {{ form_row(form.content) }}
+        </div>
+
+        <div class="col-12 col-lg-4">
+            {{ form_row(form.completed) }}
+            
+            {{ form_row(form.archived) }}
+
+            {{ form_row(form.limitedAt) }}
+            
+            {{ form_row(form.status) }}
+            
+            {{ form_row(form.priority) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
