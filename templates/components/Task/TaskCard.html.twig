@@ -1,41 +1,66 @@
-<article {{ attributes.defaults({class: 'col-12'}) }}>
+<article {{ attributes.defaults({class: 'col-12'}) }} data-loading="addClass(opacity-50)">
     <twig:Bootstrap:Card class="bg-white">
         <twig:block name="content">
-            <header class="mb-3">
-                <h4 class="h6 mb-0 fw-semibold">{{ task.title }}</h4>
-            </header>
 
-            {% if task.content %}
-                {{ task.content }}
+            {% if not isDisplayUpdatedForm %}
+                <header class="mb-3">
+                    <h4 class="h6 mb-0 fw-semibold">{{ task.title }}</h4>
+                </header>
+
+                {% if task.content %}
+                    {{ task.content }}
+                {% endif %}
+
+                <footer class="mt-4">
+                    <a href="#"
+                        class="cursor me-2 text-decoration-none" 
+                        data-action="live#action:prevent"
+                        data-live-action-param="toggleDisplayUpdatedForm"
+                    >
+                        <twig:Badge type="primary" data-action="live#action"
+                        data-live-action-param="toggleDisplayUpdatedForm">
+                            <twig:ux:icon name="tabler:edit" class="icon" />
+                        </twig:Badge>
+                    </a>
+
+                    {% if task.completed %}
+                        <twig:Badge type="success" title="Complétée">
+                            <twig:ux:icon name="tabler:check" class="icon" />
+                        </twig:Badge>
+                    {% endif %}
+
+                    {% if task.archived %}
+                        <twig:Badge type="secondary" title="Archivée">
+                            <twig:ux:icon name="tabler:archive" class="icon" />
+                        </twig:Badge>
+                    {% endif %}
+
+                    <twig:Badge type="{{ task.priority.color }}" title="{{ task.priority.value }}">
+                        <twig:ux:icon name="{{ task.priority.icon }}" class="icon"/>
+                    </twig:Badge>
+
+                    <twig:Badge type="{{ task.status.color }}" title="{{ task.status.value }}">
+                        <twig:ux:icon name="{{ task.status.icon }}" class="icon" />
+                    </twig:Badge>
+
+                    {% if task.limitedAt %}
+                        <twig:Badge type="primary" title="{{ task.limitedAt|date('d/m/Y') }}">
+                            <twig:ux:icon name="tabler:calendar" class="icon" />
+                        </twig:Badge>
+                    {% endif %}
+                </footer>
+            {% else %}
+            <div data-loading="addClass(opacity-50)">
+                <div class="d-flex mb-3 justify-content-end">
+                    <button class="btn btn-sm btn-primary" type="button" data-action="live#action:prevent"
+                        data-live-action-param="toggleDisplayUpdatedForm">
+                        <twig:ux:icon name="tabler:x" class="icon" />
+                    </button>
+                </div>
+                <twig:Task:TaskUpdatedForm task="{{ task }}" />
+            </div>
             {% endif %}
 
-            <footer class="mt-4">
-                {% if task.completed %}
-                    <twig:Badge type="success" title="Complétée">
-                        <twig:ux:icon name="tabler:check" class="icon" />
-                    </twig:Badge>
-                {% endif %}
-
-                {% if task.archived %}
-                    <twig:Badge type="secondary" title="Archivée">
-                        <twig:ux:icon name="tabler:archive" class="icon" />
-                    </twig:Badge>
-                {% endif %}
-
-                <twig:Badge type="{{ task.priority.color }}" title="{{ task.priority.value }}">
-                    <twig:ux:icon name="{{ task.priority.icon }}" class="icon"/>
-                </twig:Badge>
-
-                <twig:Badge type="{{ task.status.color }}" title="{{ task.status.value }}">
-                    <twig:ux:icon name="{{ task.status.icon }}" class="icon" />
-                </twig:Badge>
-
-                {% if task.limitedAt %}
-                    <twig:Badge type="primary" title="{{ task.limitedAt|date('d/m/Y') }}">
-                        <twig:ux:icon name="tabler:calendar" class="icon" />
-                    </twig:Badge>
-                {% endif %}
-            </footer>
         </twig:block>
     </twig:Bootstrap:Card>
 </article>
