@@ -49,6 +49,7 @@ final class TaskList
     }
 
     #[LiveListener('task:created')]
+    #[LiveListener('task:removed')]
     public function refreshAfterTaskCreated()
     {
     }

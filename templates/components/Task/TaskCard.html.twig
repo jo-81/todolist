@@ -18,44 +18,71 @@
                     </div>
                 {% endif %}
 
-                <footer class="mt-4">
-                    <a href="#"
-                        class="cursor me-2 text-decoration-none" 
-                        data-action="live#action:prevent"
-                        data-live-action-param="toggleDisplayUpdatedForm"
-                    >
-                        <twig:Badge type="primary" data-action="live#action"
-                        data-live-action-param="toggleDisplayUpdatedForm">
-                            <twig:ux:icon name="tabler:edit" class="icon" />
-                        </twig:Badge>
-                    </a>
+                <footer class="mt-4 d-sm-flex justify-content-between align-items-center">
+                    <div class="mb-2 mb-sm-0">
+                        <a href="#" class="cursor text-decoration-none" data-action="live#action:prevent"
+                            data-live-action-param="toggleDisplayUpdatedForm">
+                            <twig:Badge type="primary" data-action="live#action" data-live-action-param="toggleDisplayUpdatedForm">
+                                <twig:ux:icon name="tabler:edit" class="icon" />
+                            </twig:Badge>
+                        </a>
+                        
+                        <a href="#" class="cursor text-decoration-none" data-action="live#action:prevent"
+                            data-live-action-param="toggleDisplayRemoveCard">
+                            <twig:Badge type="danger" data-action="live#action" data-live-action-param="toggleDisplayUpdatedForm">
+                                <twig:ux:icon name="tabler:trash" class="icon" />
+                            </twig:Badge>
+                        </a>
+                    </div>
 
-                    {% if task.completed %}
+                    <div>
+                        {% if task.completed %}
                         <twig:Badge type="success" title="Complétée">
                             <twig:ux:icon name="tabler:check" class="icon" />
                         </twig:Badge>
-                    {% endif %}
-
-                    {% if task.archived %}
+                        {% endif %}
+                        
+                        {% if task.archived %}
                         <twig:Badge type="secondary" title="Archivée">
                             <twig:ux:icon name="tabler:archive" class="icon" />
                         </twig:Badge>
-                    {% endif %}
-
-                    <twig:Badge type="{{ task.priority.color }}" title="{{ task.priority.value }}">
-                        <twig:ux:icon name="{{ task.priority.icon }}" class="icon"/>
-                    </twig:Badge>
-
-                    <twig:Badge type="{{ task.status.color }}" title="{{ task.status.value }}">
-                        <twig:ux:icon name="{{ task.status.icon }}" class="icon" />
-                    </twig:Badge>
-
-                    {% if task.limitedAt %}
+                        {% endif %}
+                        
+                        <twig:Badge type="{{ task.priority.color }}" title="{{ task.priority.value }}">
+                            <twig:ux:icon name="{{ task.priority.icon }}" class="icon" />
+                        </twig:Badge>
+                        
+                        <twig:Badge type="{{ task.status.color }}" title="{{ task.status.value }}">
+                            <twig:ux:icon name="{{ task.status.icon }}" class="icon" />
+                        </twig:Badge>
+                        
+                        {% if task.limitedAt %}
                         <twig:Badge type="primary" title="{{ task.limitedAt|date('d/m/Y') }}">
                             <twig:ux:icon name="tabler:calendar" class="icon" />
                         </twig:Badge>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </footer>
+
+                {% if isDisplayRemoveCard %}
+                <div class="mt-3 d-lg-inline-flex align-items-center gap-2 bg-opacity-10 bg-danger p-3">
+                    <p class="mb-lg-0">Voulez-vous supprimer cette tâche ?</p>
+                    <p class="mb-0">
+                        <button 
+                            data-action="live#action"
+                            data-live-action-param="remove" 
+                            class="btn btn-sm btn-danger">Oui
+                        </button>
+                        
+                        <button 
+                            data-action="live#action"
+                            data-live-action-param="toggleDisplayRemoveCard" 
+                            class="btn btn-sm btn-primary">Non
+                        </button>
+                    </p>
+                </div>
+                {% endif %}
+
             {% else %}
             <div data-loading="addClass(opacity-50)">
                 <div class="d-flex mb-3 justify-content-end">
