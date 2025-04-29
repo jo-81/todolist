@@ -31,14 +31,10 @@ enum Status: string implements TranslatableInterface
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
-        // Translate enum from name (Left, Center or Right)
-        // return $translator->trans($this->name, locale: $locale);
-
-        // Translate enum using custom labels
         return match ($this) {
-            self::TODO  => $translator->trans('A faire', locale: $locale),
+            self::TODO => $translator->trans('A faire', locale: $locale),
             self::IN_PROGRESS => $translator->trans('En cours', locale: $locale),
-            self::DONE  => $translator->trans('Terminée', locale: $locale),
+            self::DONE => $translator->trans('Terminée', locale: $locale),
         };
     }
 }

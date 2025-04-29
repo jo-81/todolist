@@ -7,6 +7,7 @@ use App\Repository\TaskRepository;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -45,5 +46,10 @@ final class TaskList
             $this->archived,
             $this->completed
         );
+    }
+
+    #[LiveListener('task:created')]
+    public function refreshAfterTaskCreated()
+    {
     }
 }

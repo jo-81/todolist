@@ -45,8 +45,9 @@
     </twig:Bootstrap:Form:Container>
 
     <div class="d-flex gap-2 flex-wrap">
+        <twig:Task:TaskRegisterForm data-loading="addClass(opacity-50)" section="{{ section }}" data-controller="editor" />
         {% for task in this.tasks %}
-        <twig:Task:TaskCard key="task-{{ task.id }}" task="{{ task }}" />
+            <twig:Task:TaskCard key="task-{{ task.id }}" task="{{ task }}" />
         {% endfor %}
     </div>
 </section>

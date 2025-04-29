@@ -4,11 +4,18 @@
 
             {% if not isDisplayUpdatedForm %}
                 <header class="mb-3">
+                    <small>{{ task.createdAt|date('d/m/Y') }}</small>
                     <h4 class="h6 mb-0 fw-semibold">{{ task.title }}</h4>
                 </header>
 
                 {% if task.content %}
-                    {{ task.content }}
+                    <div data-controller="read-more" data-read-more-more-text-value="Lire la suite" data-read-more-less-text-value="Réduire le texte">
+                        <div class="my-content" data-read-more-target="content">
+                            {{ task.content|sanitize_html }}
+                        </div>
+                    
+                        <button class="btn btn-sm btn-link px-0" data-action="read-more#toggle">Lire la suite</button>
+                    </div>
                 {% endif %}
 
                 <footer class="mt-4">

@@ -4,7 +4,6 @@ namespace App\DTO\Task;
 
 use App\Enum\Status;
 use App\Enum\Priority;
-use DateTimeImmutable;
 
 class TaskDTO
 {
@@ -12,7 +11,7 @@ class TaskDTO
 
     private ?string $content = null;
 
-    private ?DateTimeImmutable $limitedAt = null;
+    private ?\DateTimeImmutable $limitedAt = null;
 
     private Status $status;
 
@@ -46,12 +45,12 @@ class TaskDTO
         return $this;
     }
 
-    public function getLimitedAt(): ?DateTimeImmutable
+    public function getLimitedAt(): ?\DateTimeImmutable
     {
         return $this->limitedAt;
     }
 
-    public function setLimitedAt(?DateTimeImmutable $limitedAt): static
+    public function setLimitedAt(?\DateTimeImmutable $limitedAt): static
     {
         $this->limitedAt = $limitedAt;
 

@@ -44,4 +44,10 @@ return [
         'version' => '5.3.5',
         'type' => 'css',
     ],
+    '@ckeditor/ckeditor5-build-classic' => [
+        'version' => '44.3.0',
+    ],
+    '@stimulus-components/read-more' => [
+        'version' => '5.0.0',
+    ],
 ];
