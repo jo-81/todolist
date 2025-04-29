@@ -8,16 +8,16 @@
     </header>
     {# Titre #}
 
-    {% if this.sections is not empty %}
-        {# Filtre et recherche #}
-        <twig:Bootstrap:Form:Container>
+    {# Filtre et recherche #}
+    <twig:Bootstrap:Form:Container>
             <twig:block name="content">
                 <twig:Bootstrap:Form:Search class="col-12 col-md-6 col-xl-4" placeholder="Rechercher une section" />
             </twig:block>
-        </twig:Bootstrap:Form:Container>
-        {# Filtre et recherche #}
-    {% else %}
-        <p>Aucunes sections d'enregistrées pour ce projet.</p>
+    </twig:Bootstrap:Form:Container>
+    {# Filtre et recherche #}
+    
+    {% if this.sections is empty %}
+        <p>Aucun résultat.</p>
     {% endif %}
 
     {# Liste des sections #}

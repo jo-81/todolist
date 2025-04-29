@@ -27,6 +27,12 @@ class TaskService
         $this->em->flush();
     }
 
+    public function remove(Task $task)
+    {
+        $this->em->remove($task);
+        $this->em->flush();
+    }
+
     private function sanitizepropertyContent(string $content): string
     {
         return $this->htmlSanitizer->sanitize($content);
