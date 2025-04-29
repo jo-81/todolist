@@ -607,35 +607,39 @@
       </trans-unit>
       <trans-unit id="bjePH9A" resname="Votre adresse email ne peut pas être vide.">
         <source>Votre adresse email ne peut pas être vide.</source>
-        <target>__Votre adresse email ne peut pas être vide.</target>
+        <target>Votre adresse email ne peut pas être vide.</target>
       </trans-unit>
       <trans-unit id="sJxfMq_" resname="Votre adresse email n'est pas au bon format.">
         <source>Votre adresse email n'est pas au bon format.</source>
-        <target>__Votre adresse email n'est pas au bon format.</target>
+        <target>Votre adresse email n'est pas au bon format.</target>
       </trans-unit>
       <trans-unit id="ifYWTX2" resname="Le texte ne doit pas dépasser {{ limit }} caractères.">
         <source>Le texte ne doit pas dépasser {{ limit }} caractères.</source>
-        <target>__Le texte ne doit pas dépasser {{ limit }} caractères.</target>
+        <target>Le texte ne doit pas dépasser {{ limit }} caractères.</target>
       </trans-unit>
       <trans-unit id="6EkAEln" resname="Le contenu contient des éléments non autorisés.">
         <source>Le contenu contient des éléments non autorisés.</source>
-        <target>__Le contenu contient des éléments non autorisés.</target>
+        <target>Le contenu contient des éléments non autorisés.</target>
       </trans-unit>
       <trans-unit id="KoQb5.h" resname="Le contenu doit être une chaîne de caractères.">
         <source>Le contenu doit être une chaîne de caractères.</source>
-        <target>__Le contenu doit être une chaîne de caractères.</target>
+        <target>Le contenu doit être une chaîne de caractères.</target>
       </trans-unit>
       <trans-unit id="AoWlcyg" resname="Ce champ ne peut pas être vide.">
         <source>Ce champ ne peut pas être vide.</source>
-        <target>__Ce champ ne peut pas être vide.</target>
+        <target>Ce champ ne peut pas être vide.</target>
       </trans-unit>
       <trans-unit id="hdqoeof" resname="Ce champ doit contenir un minimum de {{ limit }} caractères.">
         <source>Ce champ doit contenir un minimum de {{ limit }} caractères.</source>
-        <target>__Ce champ doit contenir un minimum de {{ limit }} caractères.</target>
+        <target>Ce champ doit contenir un minimum de {{ limit }} caractères.</target>
       </trans-unit>
       <trans-unit id="m3OHdjX" resname="Ce champ ne peut pas contenir plus de {{ limit }} caractères.">
         <source>Ce champ ne peut pas contenir plus de {{ limit }} caractères.</source>
-        <target>__Ce champ ne peut pas contenir plus de {{ limit }} caractères.</target>
+        <target>Ce champ ne peut pas contenir plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id=".Db7Jh0" resname="La date doit être antérieure à aujourd'hui.">
+        <source>La date doit être antérieure à aujourd'hui.</source>
+        <target>La date doit être antérieure à aujourd'hui.</target>
       </trans-unit>
     </body>
   </file>

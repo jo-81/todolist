@@ -3,6 +3,7 @@ twig:
     form_themes: 
         - 'bootstrap_5_layout.html.twig'
         - 'form/description_field_widget.html.twig'
+        - 'form/editor_field_widget.html.twig'
 
 when@test:
     twig:

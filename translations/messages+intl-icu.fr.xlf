@@ -9,6 +9,18 @@
         <source>status.todo.label</source>
         <target>__status.todo.label</target>
       </trans-unit>
+      <trans-unit id="cv31935" resname="A faire">
+        <source>A faire</source>
+        <target>A faire</target>
+      </trans-unit>
+      <trans-unit id="RcLit66" resname="En cours">
+        <source>En cours</source>
+        <target>En cours</target>
+      </trans-unit>
+      <trans-unit id="QhWu7fs" resname="Terminée">
+        <source>Terminée</source>
+        <target>Terminée</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

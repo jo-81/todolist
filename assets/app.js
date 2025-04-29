@@ -7,3 +7,4 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./styles/ckeditor5.css";
