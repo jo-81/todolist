@@ -18,10 +18,13 @@ class TaskService
         $task->setArchived(false);
         $task->setStatus(Status::TODO);
 
-        $content = $task->getContent();
-        if (!is_null($content)) {
-            $task->setContent($this->sanitizepropertyContent($content));
-        }
+        $this->em->persist($task);
+        $this->em->flush();
+    }
+
+    public function updated(Task $task)
+    {
+        $task->setUpdatedAt(new \DateTimeImmutable());
 
         $this->em->persist($task);
         $this->em->flush();
@@ -31,10 +34,5 @@ class TaskService
     {
         $this->em->remove($task);
         $this->em->flush();
-    }
-
-    private function sanitizepropertyContent(string $content): string
-    {
-        return $this->htmlSanitizer->sanitize($content);
     }
 }

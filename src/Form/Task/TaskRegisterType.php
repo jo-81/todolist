@@ -45,6 +45,7 @@ class TaskRegisterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => TaskRegisterDTO::class,
+            'sanitize_html' => true,
         ]);
     }
 }

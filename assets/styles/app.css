@@ -4,7 +4,3 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--read-more-line-clamp, 1);
 }
-
-p:last-of-type {
-    margin-bottom: 0 !important;
-}

@@ -37,6 +37,8 @@ import translations from "../ckeditor/translations/fr.js";
 export default class extends Controller {
     editor = null;
 
+    static targets = ["contentEditor"];
+
     async initialize() {
         this.component = await getComponent(this.element);
         this.setupEditor();
@@ -50,22 +52,18 @@ export default class extends Controller {
                 });
             }
 
-            const editorField = document.querySelector("[data-editor]");
-            
-            if (editorField && !editorField.classList.contains('ck-editor__editable')) {
-                ClassicEditor.create(editorField, this.getEditorConfig())
-                    .then(editor => {
-                        this.editor = editor;
+            if (!this.hasContentEditorTarget) return;
+            ClassicEditor.create(this.contentEditorTarget, this.getEditorConfig())
+                .then(editor => {
+                    this.editor = editor;
                         editor.model.document.on('change:data', () => {
-                            // this.component.emit("contentUpdated", {'content': this.editor.getData()});
-                            editorField.value = this.editor.getData();
-                            editorField.dispatchEvent(new Event("change", { bubbles: true }));
+                            this.contentEditorTarget.value = this.editor.getData();
+                            this.contentEditorTarget.dispatchEvent(new Event("change", { bubbles: true }));
                         });
                     })
                     .catch(error => {
                         console.error('CKEditor error:', error);
                     });
-            }
         });
     }
 

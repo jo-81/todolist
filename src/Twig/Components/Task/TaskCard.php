@@ -8,6 +8,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -51,5 +52,11 @@ final class TaskCard
         $this->isDisplayRemoveCard = false;
 
         $this->emitUp('task:removed');
+    }
+
+    #[LiveListener('task:updated')]
+    public function updated()
+    {
+        $this->isDisplayUpdatedForm = false;
     }
 }
