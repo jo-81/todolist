@@ -22,7 +22,7 @@ class TaskRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('t')
             ->andWhere('t.section = :section')
             ->setParameter('section', $section)
-            ->orderBy("t.createdAt", "DESC")
+            ->orderBy('t.createdAt', 'DESC')
         ;
 
         if (!empty($status)) {

@@ -13,24 +13,17 @@ class TaskRegisterDTO
         match: false,
         message: 'Le contenu contient des éléments non autorisés.',
     )]
-    private string $title;
+    protected string $title;
 
-    private ?string $content = null;
+    protected ?string $content = null;
 
-    #[Assert\When(
-        expression: 'value != null',
-        constraints: [
-            new Assert\DateTime(),
-            new Assert\LessThan('today', message: "La date doit être antérieure à aujourd'hui."),
-        ]
-    )]
-    private ?\DateTimeImmutable $limitedAt = null;
+    protected ?\DateTimeImmutable $limitedAt = null;
 
     #[Assert\Type(
         type: Priority::class,
         message: 'La valeur doit être un cas valide de '.Priority::class
     )]
-    private Priority $priority;
+    protected Priority $priority;
 
     public function getTitle(): string
     {
@@ -49,7 +42,7 @@ class TaskRegisterDTO
         return $this->content;
     }
 
-    public function setContent(string $content): static
+    public function setContent(?string $content = null): static
     {
         $this->content = $content;
 

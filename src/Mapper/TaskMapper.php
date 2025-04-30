@@ -3,14 +3,14 @@
 namespace App\Mapper;
 
 use App\Entity\Task;
-use App\DTO\Task\TaskDTO;
+use App\DTO\Task\TaskUpdatedDTO;
 use App\DTO\Task\TaskRegisterDTO;
 
 class TaskMapper
 {
-    public static function toTaskDTO(Task $task): TaskDTO
+    public static function toUpdatedTaskDTO(Task $task): TaskUpdatedDTO
     {
-        $dto = new TaskDTO();
+        $dto = new TaskUpdatedDTO();
         $dto
             ->setTitle($task->getTitle())
             ->setContent($task->getContent())
@@ -32,6 +32,22 @@ class TaskMapper
             ->setContent($taskRegisterDTO->getContent())
             ->setLimitedAt($taskRegisterDTO->getLimitedAt())
             ->setPriority($taskRegisterDTO->getPriority())
+        ;
+
+        return $entity;
+    }
+
+    public static function taskFromUpdatedDTO(TaskUpdatedDTO $taskUpdatedDTO, ?Task $task = null)
+    {
+        $entity = $task ?? new Task();
+        $entity
+            ->setTitle($taskUpdatedDTO->getTitle())
+            ->setContent($taskUpdatedDTO->getContent())
+            ->setLimitedAt($taskUpdatedDTO->getLimitedAt())
+            ->setPriority($taskUpdatedDTO->getPriority())
+            ->setStatus($taskUpdatedDTO->getStatus())
+            ->setArchived($taskUpdatedDTO->isArchived())
+            ->setCompleted($taskUpdatedDTO->isCompleted())
         ;
 
         return $entity;

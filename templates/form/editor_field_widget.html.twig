@@ -1,7 +1,7 @@
 {% block editor_field_widget %}
     <div class="mb-3">
         <textarea 
-            data-editor
+            data-editor-target="contentEditor"
             class="form-control" 
             {{ block('widget_attributes') }}>{% if value is not empty %}{{ value }}{% endif %}</textarea>
             

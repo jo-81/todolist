@@ -1,49 +1,48 @@
 <div {{ attributes.defaults({ class: "col-12" }) }}> 
-
     {% if not isDisplayForm %}
-    <div class="mt-2">
-        <button 
-        type="button" 
-        class="btn btn-primary" 
-        data-action="live#action" 
-        data-live-action-param="toggleDisplayForm">Ajouter une tâche</button>
-    </div>
+        <div class="mt-2">
+            <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-action="live#action" 
+            data-live-action-param="toggleDisplayForm">Ajouter une tâche</button>
+        </div>
 
-    {% else %}
-    <twig:Bootstrap:Card class="bg-white">
-        <twig:block name="content">
-            <div class="d-flex mb-3 justify-content-end">
-                <button class="btn btn-sm btn-primary" type="button" data-action="live#action"
-                    data-live-action-param="toggleDisplayForm">
-                    <twig:ux:icon name="tabler:x" class="icon" />
-                </button>
-            </div>
+        {% else %}
+        <twig:Bootstrap:Card class="bg-white">
+            <twig:block name="content">
+                <div class="d-flex mb-3 justify-content-end">
+                    <button class="btn btn-sm btn-primary" type="button" data-action="live#action"
+                        data-live-action-param="toggleDisplayForm">
+                        <twig:ux:icon name="tabler:x" class="icon" />
+                    </button>
+                </div>
 
-            {{ form_start(form, {
-                'attr': {
-                    'data-action': 'live#action:prevent',
-                    'data-live-action-param': 'save',
-                }
-            }) }}
-            <div class="row">
-                <div class="col-12 col-lg-8 mb-3 mb-lg-0">
-                    {{ form_row(form.title) }}
-            
-                    {{ form_row(form.content) }}
+                {{ form_start(form, {
+                    'attr': {
+                        'data-action': 'live#action:prevent',
+                        'data-live-action-param': 'save',
+                    }
+                }) }}
+                <div class="row">
+                    <div class="col-12 col-lg-8 mb-3 mb-lg-0">
+                        {{ form_row(form.title) }}
+                
+                        {{ form_row(form.content) }}
+                    </div>
+                
+                    <div class="col-12 col-lg-4">
+                        {{ form_row(form.limitedAt) }}
+                
+                        {{ form_row(form.priority) }}
+                    </div>
                 </div>
-            
-                <div class="col-12 col-lg-4">
-                    {{ form_row(form.limitedAt) }}
-            
-                    {{ form_row(form.priority) }}
-                </div>
-            </div>
-            <button
-                data-loading="action(save)|addAttribute(disabled)"
-                class="btn btn-sm btn-primary"
-                type="submit">Enregistrer</button>
-            {{ form_end(form) }}
-        </twig:block>
-    </twig:Bootstrap:Card>
+                <button
+                    data-loading="action(save)|addAttribute(disabled)"
+                    class="btn btn-sm btn-primary"
+                    type="submit">Enregistrer</button>
+                {{ form_end(form) }}
+            </twig:block>
+        </twig:Bootstrap:Card>
     {% endif %}
 </div>

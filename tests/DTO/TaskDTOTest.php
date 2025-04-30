@@ -27,20 +27,6 @@ class TaskDTOTest extends AbstractDTOTest
         $this->assertEquals(1, $validationResults['count']);
     }
 
-    /**
-     * testPropertyLimitedAt.
-     */
-    public function testPropertyLimitedAt(): void
-    {
-        $entity = $this->getEntity();
-
-        /* Champ requis */
-        $entity->setLimitedAt(new \DateTimeImmutable('2025-01-01'));
-        $validationResults = $this->getValidationErrors($entity, $this->validator);
-
-        $this->assertEquals(1, $validationResults['count']);
-    }
-
     private function getEntity(): TaskRegisterDTO
     {
         return (new TaskRegisterDTO())
