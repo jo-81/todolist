@@ -7,6 +7,7 @@ App\Entity\Task:
     status: "<getStatus(todo)>"
     priority: "<getPriority(low)>"
     limitedAt: "<(rand(0, 9) === 0 ? new DateTimeImmutable('now') : null)>"
+    labels: ['@label_1', '@label_2', '@label_3', '@label_4', '@label_5']
 
   task_{6..10}:
     title: Task <current()>
@@ -16,3 +17,4 @@ App\Entity\Task:
     status: "<getStatus(todo)>"
     priority: "<getPriority(low)>"
     limitedAt: "<(rand(0, 9) === 0 ? new DateTimeImmutable('now') : null)>"
+    labels: ['@label_6', '@label_7', '@label_8', '@label_9', '@label_10']

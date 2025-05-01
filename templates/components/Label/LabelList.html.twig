@@ -1,0 +1,25 @@
+<div {{ attributes }} class="d-flex flex-wrap gap-1 mb-3">
+    {% for label in this.labels %}
+        <twig:Label:LabelCard label="{{ label }}"/>
+    {% endfor %}
+
+    {% if this.labels.totalItemCount > this.displayItems %}
+        <button 
+            data-loading="action(nextPage)|addClass(opacity-50)"
+            class="btn btn-sm btn-outline-primary" 
+            data-action="live#action" 
+            data-live-action-param="nextPage">
+            <twig:ux:icon name="tabler:plus" class="icon" />
+        </button>
+    {% endif %}
+
+    {% if page >= 2 %}
+        <button 
+            data-loading="action(prevPage)|addClass(opacity-50)"
+            class="btn btn-sm btn-outline-primary" 
+            data-action="live#action" 
+            data-live-action-param="prevPage">
+            <twig:ux:icon name="tabler:minus" class="icon" />
+        </button>
+    {% endif %}
+</div>
