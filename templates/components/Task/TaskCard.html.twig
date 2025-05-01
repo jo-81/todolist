@@ -1,11 +1,15 @@
 <article {{ attributes.defaults({class: 'col-12'}) }} data-loading="addClass(opacity-50)">
     <twig:Bootstrap:Card class="bg-white">
         <twig:block name="content">
-
             {% if not isDisplayUpdatedForm %}
+
+                {% if not task.labels is empty %}
+                    <twig:Label:LabelList task="{{ task }}" />
+                {% endif %}
+
                 <header class="mb-3">
+                    <h4 class="h6 mb-1 fw-semibold">{{ task.title }}</h4>
                     <small>{{ task.createdAt|date('d/m/Y') }}</small>
-                    <h4 class="h6 mb-0 fw-semibold">{{ task.title }}</h4>
                 </header>
 
                 {% if task.content %}

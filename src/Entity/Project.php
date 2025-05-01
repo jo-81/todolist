@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProjectRepository;
@@ -39,9 +41,16 @@ class Project
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Workspace $workspace = null;
 
+    /**
+     * @var Collection<int, Label>
+     */
+    #[ORM\OneToMany(targetEntity: Label::class, mappedBy: 'project', orphanRemoval: true)]
+    private Collection $labels;
+
     public function __construct()
     {
         $this->archived = false;
+        $this->labels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,5 +149,35 @@ class Project
 
         $this->createdAt = $now;
         $this->updatedAt = $now;
+    }
+
+    /**
+     * @return Collection<int, Label>
+     */
+    public function getLabels(): Collection
+    {
+        return $this->labels;
+    }
+
+    public function addLabel(Label $label): static
+    {
+        if (!$this->labels->contains($label)) {
+            $this->labels->add($label);
+            $label->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLabel(Label $label): static
+    {
+        if ($this->labels->removeElement($label)) {
+            // set the owning side to null (unless already changed)
+            if ($label->getProject() === $this) {
+                $label->setProject(null);
+            }
+        }
+
+        return $this;
     }
 }

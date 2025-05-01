@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Enum\Status;
 use App\Enum\Priority;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TaskRepository;
@@ -52,6 +54,17 @@ class Task
 
     #[ORM\Column]
     private ?bool $completed = null;
+
+    /**
+     * @var Collection<int, Label>
+     */
+    #[ORM\ManyToMany(targetEntity: Label::class, inversedBy: "tasks")]
+    private Collection $labels;
+
+    public function __construct()
+    {
+        $this->labels = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -198,5 +211,29 @@ class Task
         $this->createdAt = $now;
         $this->updatedAt = $now;
         $this->completed = false;
+    }
+
+    /**
+     * @return Collection<int, Label>
+     */
+    public function getLabels(): Collection
+    {
+        return $this->labels;
+    }
+
+    public function addLabel(Label $label): static
+    {
+        if (!$this->labels->contains($label)) {
+            $this->labels->add($label);
+        }
+
+        return $this;
+    }
+
+    public function removeLabel(Label $label): static
+    {
+        $this->labels->removeElement($label);
+
+        return $this;
     }
 }
